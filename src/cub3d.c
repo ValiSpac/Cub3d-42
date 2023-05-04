@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:27:33 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/04/29 20:44:47 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/04 13:09:27 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,13 +27,14 @@ int	main(int argc, char **argv)
 	if (parse_file(argv[1], &cub3d.data) != 0)
 		return (print_parsing_error(cub3d.data.parse_errno),
 			cub3d_destroy_mlx(cub3d), free_parse_data(&cub3d.data), 1);
-	dump_map(&cub3d.data);
-	printf("NO='%s'\n", cub3d.data.NO);
-	printf("SO='%s'\n", cub3d.data.SO);
-	printf("WE='%s'\n", cub3d.data.WE);
-	printf("EA='%s'\n", cub3d.data.EA);
-	printf("FC=%d\n", cub3d.data.FC);
-	printf("CC=%d\n", cub3d.data.CC);
+	// dump_map(&cub3d.data);
+	// printf("NO='%s'\n", cub3d.data.NO);
+	// printf("SO='%s'\n", cub3d.data.SO);
+	// printf("WE='%s'\n", cub3d.data.WE);
+	// printf("EA='%s'\n", cub3d.data.EA);
+	// printf("FC=%d\n", cub3d.data.FC);
+	// printf("CC=%d\n", cub3d.data.CC);
+	
 	free_parse_data(&cub3d.data);
 	//set_hooks(&cub3d);
 	//mlx_loop(cub3d.mlx);
