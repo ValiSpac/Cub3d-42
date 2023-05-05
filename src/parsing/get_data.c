@@ -6,11 +6,11 @@
 /*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:36:33 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/04/29 17:41:37 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:43:56 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 static int	fill_parse_data_from_line(char *line, t_parse_data *parse_data);
 

@@ -6,11 +6,23 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:36:39 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/04 16:42:28 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/05 17:38:34 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
+
+
+static inline long	pitagora(float ax, float ay, float bx, float by, float ang)
+{
+	return(sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+}
+
+void	check_for_shortest_line(t_ray_data *horizontal_inter,
+						t_ray_data *vertical_inter)
+{
+//code
+}
 
 void	secure_angle(float angle)
 {
@@ -24,8 +36,8 @@ void	draw_ray(t_cub3d *data)
 {
 	t_player_data	*player;
 	t_ray_data		*ray_list;
-	t_ray_data		vertical_inter;
-	t_ray_data		horizontal_inter;
+	t_ray_data		*vertical_inter;
+	t_ray_data		*horizontal_inter;
 	int				i;
 
 	i = 0;
@@ -36,8 +48,9 @@ void	draw_ray(t_cub3d *data)
 	while (i < (player->fov * RAY_PER_DEGREE))
 	{
 		horizontal_inter = check_for_horizontal_wall(data, &ray_list[i]);
-	//	vertical_inter = check_for_vertical_wall(ray_list[i]);
-	//	ray_list[i] = check_for_shortest_line(ray_list[i]);
+		vertical_inter = check_for_vertical_wall(ray_list[i]);
+	//	ray_list[i] = check_for_shortest_line(ray_list[i], horizontal_inter,
+	//									vertical_inter);
 	//	draw_3d(ray_list[i]);
 		ray_list[i++].ra += DEG / RAY_PER_DEGREE;
 		secure_angle(ray_list[i].ra);

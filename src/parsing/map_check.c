@@ -1,5 +1,5 @@
 
-#include "parse.h"
+#include "cub3d.h"
 
 static int	map_has_invalid_blocks(t_parse_data *parse_data)
 {
@@ -21,7 +21,7 @@ static int	map_has_invalid_blocks(t_parse_data *parse_data)
 static int	empty_space_is_enclosed(t_parse_data *parse_data, int x, int y)
 {
 	int		**map;
-	
+
 	if (x <= 0 || y <= 0
 		|| x >= parse_data->map_w - 1
 		|| y >= parse_data->map_h - 1)

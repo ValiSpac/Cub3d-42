@@ -1,5 +1,5 @@
 
-#include "parse.h"
+#include "cub3d.h"
 
 static int	is_data_line_ogey(char *line)
 {

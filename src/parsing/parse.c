@@ -6,11 +6,11 @@
 /*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:33:53 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/04/29 20:40:15 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:43:56 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 static void	free_cub3d_map(int **map)
 {

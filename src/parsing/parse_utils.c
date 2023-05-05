@@ -1,5 +1,5 @@
 
-#include "parse.h"
+#include "cub3d.h"
 
 int	line_is_map_content(char *line)
 {

@@ -3,14 +3,15 @@ CFLAGS		=	-Wall -Wextra -Werror
 CC			=	cc
 MAKE		=	make
 
-HEADERS		=	include/cub3d.h include/parse.h
+HEADERS		=	include/cub3d.h
 INCLUDE		=	-I ./include -I $(MLX_DIR) -I $(LIBFT_DIR)
 OBJS		=	$(patsubst %.c,%.o,$(SRCS))
-SRCS		=	./src/cub3d.c ./src/common_utils.c \
+SRCS		=	./src/cub3d.c ./src/common_utils.c ./src/events.c \
 				./src/parsing/parse.c ./src/parsing/get_data.c \
 				./src/parsing/get_data_utils.c ./src/parsing/parse_utils.c \
 				./src/parsing/get_map.c ./src/parsing/get_map_size.c \
-				./src/parsing/format_check.c ./src/parsing/map_check.c
+				./src/parsing/format_check.c ./src/parsing/map_check.c \
+				./src/render/render_utils.c ./src/render/draw_line.c ./src/render/minimap.c
 MLX_DIR		=	./minilibx
 MLX			=	$(MLX_DIR)/libmlx_Linux.a
 

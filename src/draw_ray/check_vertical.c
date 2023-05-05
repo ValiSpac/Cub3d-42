@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   check_horizontal.c                                 :+:      :+:    :+:   */
+/*   check_vertical.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/05/04 16:31:28 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/05 17:32:53 by vpac             ###   ########.fr       */
+/*   Created: 2023/05/05 17:13:32 by vpac              #+#    #+#             */
+/*   Updated: 2023/05/05 17:32:29 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,28 +15,28 @@
 static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 						float aTan)
 {
-	if (ray->ra > PI)
+	if (ray->ra > PI2 && ray->ra < PI3)
 	{
-		ray->ry = ((((int)player->py >> 6) << 6) - 0.0001);
-		ray->rx = (player->py - ray->ry * aTan + player->px);
-		ray->yo = RES;
-		ray->xo = -1.0 * ray->yo / aTan;
+		ray->rx = ((((int)player->px >> 6) << 6) - 0.0001);
+		ray->ry = (player->px - ray->rx * aTan + player->py);
+		ray->xo = RES;
+		ray->yo = -1.0 * ray->xo / aTan;
 	}
-	else if (ray->ra < PI)
+	if (ray->ra < PI2 || ray->ra > PI3)
 	{
-		ray->ry = ((((int)player->py >> 6) << 6) + RES);
-		ray->rx = (player->py - ray->ry * aTan + player->px);
-		ray->yo = RES;
-		ray->xo = -1.0 * ray->yo / aTan;
+		ray->rx = ((((int)player->px >> 6) << 6) + RES);
+		ray->ry = (player->px - ray->rx * aTan + player->py);
+		ray->xo = RES;
+		ray->yo = -1.0 * ray->xo / aTan;
 	}
-	else if (ray->ra == 0 || ray->ra == PI)
+	if (ray->ra == 0 || ray->ra == PI)
 	{
-		ray->rx = player->px;
 		ray->ry = player->py;
+		ray->rx = player->px;
 	}
 }
 
-t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem)
+t_ray_data	*check_for_vertical_wall(t_cub3d *data, t_ray_data *ray_elem)
 {
 	t_ray_data		*ray;
 	t_player_data	*player;
@@ -44,7 +44,7 @@ t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem)
 	int				ok;
 
 	ok = 0;
-	aTan = -1.0 * (1.0 / tan(ray->ra));
+	aTan = -1.0 * tan(ray->ra);
 	player = &(data->player);
 	ray = ray_elem;
 	get_distance_to_hor_wall(player, data, aTan);

@@ -6,11 +6,11 @@
 /*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:37:20 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/04/29 20:02:58 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/04 15:43:56 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parse.h"
+#include "cub3d.h"
 
 int	have_missing_data(t_parse_data *parse_data)
 {
