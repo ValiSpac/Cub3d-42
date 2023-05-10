@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/10 12:58:08 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/10 15:57:03 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <fcntl.h>
+# include <math.h>
 
 # include <stdio.h>
 
@@ -79,17 +80,6 @@ struct s_player_data
 	float	pa;//player angle
 };
 
-typedef struct s_cub3d		t_cub3d;
-struct s_cub3d
-{
-	void			*mlx;
-	void			*window;
-	t_parse_data	parse;
-	t_frame			frame;
-	t_player_data	player;
-	int				exit;
-};
-
 typedef struct s_ray_data		t_ray_data;
 struct s_ray_data
 {
@@ -102,6 +92,20 @@ struct s_ray_data
 	int		my;
 	int		mp;
 };
+
+typedef struct s_cub3d		t_cub3d;
+struct s_cub3d
+{
+	void			*mlx;
+	void			*window;
+	t_parse_data	parse;
+	t_frame			frame;
+	t_player_data	player;
+	t_ray_data		*ray_list;
+	int				ray_count;
+	int				exit;
+};
+
 
 // cub3d
 
@@ -167,9 +171,10 @@ t_ray_data	*check_for_vertical_wall(t_cub3d *data, t_ray_data *ray_elem);
 //draw_ray/check_horizontal.c
 t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem);
 //draw_ray/draw3d.c
+void	draw3d(t_cub3d *data, t_ray_data ray);
 
 //draw_ray/calc_ray.c
-inline long	pitagora(float ax, float ay, float bx, float by, float ang);
+long		pitagora(float ax, float ay, float bx, float by);
 void		secure_angle(float angle);
 void		draw_ray(t_cub3d *data);
 

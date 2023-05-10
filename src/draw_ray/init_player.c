@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:11:06 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/04 15:42:02 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/10 17:57:28 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,10 +42,10 @@ void	init_player_data(t_cub3d	*data)
 			if (data->parse.map[y][x] >= 3)
 			{
 				player->pa = get_pa_from_start_point(data->parse.map[y][x]);
-				player->py = y;
-				player->px = x;
-				player->pdy = y * RES - RES / 2;
-				player->pdx = x * RES - RES / 2;
+				player->py = y * RES + RES / 2;
+				player->px = x * RES + RES / 2;
+				player->pdy = y * RES + RES / 2;
+				player->pdx = x * RES + RES / 2;
 				data->parse.map[y][x] = 1;
 			}
 		}

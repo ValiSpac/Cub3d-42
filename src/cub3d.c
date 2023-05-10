@@ -6,7 +6,7 @@
 /*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:27:33 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/04 15:57:51 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/10 15:55:57 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ int	main(int argc, char **argv)
 	if (parse_file(argv[1], &cub3d.parse) != 0)
 		return (print_parsing_error(cub3d.parse.parse_errno),
 			cub3d_destroy_mlx(cub3d), free_parse_data(&cub3d.parse), 2);
-	frame_draw_minimap(&cub3d);
+	init_player_data(&cub3d);
+	printf("ppos=%d;%d\n", cub3d.player.px, cub3d.player.py);
 	set_hooks(&cub3d);
 	mlx_loop(cub3d.mlx);
 	free_parse_data(&cub3d.parse);
@@ -34,6 +35,11 @@ int	main(int argc, char **argv)
 
 static int	cub3d_loop(t_cub3d *cub3d)
 {
+	cub3d->ray_list = 0;
+	draw_ray(cub3d);
+	frame_draw_minimap(cub3d);
+	if (cub3d->ray_list)
+		free(cub3d->ray_list);
 	if (cub3d->exit)
 		mlx_loop_end(cub3d->mlx);
 	return (0);

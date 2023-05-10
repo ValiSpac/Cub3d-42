@@ -3,24 +3,21 @@
 /*                                                        :::      ::::::::   */
 /*   draw3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:07:48 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/10 13:19:45 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/10 17:45:36 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-void	draw3d(t_player_data *p, t_ray_data *ray)
+void	draw3d(t_cub3d *data, t_ray_data ray)
 {
 	float	disW;
-	float	lineH;
-	float	ca;
 
 	disW = 10000000;
-	disW = pitagora(p->px, p->py, ray->rx, ray->ry, ray->ra);
-	ca = p->pa - ray->ra;
-	secure_angle(ca);
-
+	disW = pitagora(data->player.px, data->player.py, ray.rx, ray.ry);
+	(void)disW;
+	//printf("OFSET x=%f, y=%f\n", ray.xo, ray.yo);
 }
