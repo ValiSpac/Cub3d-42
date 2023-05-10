@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/05 15:40:06 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/10 12:58:08 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,57 +106,72 @@ struct s_ray_data
 // cub3d
 
 // common_utils
-void	print_err(char *str);
-int		cub3d_init_mlx(t_cub3d *cub3d);
-void	cub3d_destroy_mlx(t_cub3d cub3d);
+void		print_err(char *str);
+int			cub3d_init_mlx(t_cub3d *cub3d);
+void		cub3d_destroy_mlx(t_cub3d cub3d);
 
 // events
-int		handle_keydown(int keysym, t_cub3d *cub3d);
-int		handle_window_kill(t_cub3d *cub3d);
-int		handle_mousedown(int button, int x, int y, t_cub3d *cub3d);
-int		handle_mouseup(int button, int x, int y, t_cub3d *cub3d);
-int		handle_mouse_move(int x, int y, t_cub3d *cub3d);
+int			handle_keydown(int keysym, t_cub3d *cub3d);
+int			handle_window_kill(t_cub3d *cub3d);
+int			handle_mousedown(int button, int x, int y, t_cub3d *cub3d);
+int			handle_mouseup(int button, int x, int y, t_cub3d *cub3d);
+int			handle_mouse_move(int x, int y, t_cub3d *cub3d);
 
 
 
 // parse/get_data_utils
-int		have_missing_data(t_parse_data *parse_data);
-int		is_texture_line(char *line);
-int		is_color_line(char *line);
-int		is_color_valid(char **split);
+int			have_missing_data(t_parse_data *parse_data);
+int			is_texture_line(char *line);
+int			is_color_line(char *line);
+int			is_color_valid(char **split);
 // parse/get_data
-int		get_data_from_file(char *file, t_parse_data *parse_data);
+int			get_data_from_file(char *file, t_parse_data *parse_data);
 // parse/get_map_size
-int		get_map_size_from_file(char *file, t_parse_data *parse_data);
+int			get_map_size_from_file(char *file, t_parse_data *parse_data);
 // parse/get_map
-int		get_map_from_file(char *file, t_parse_data *parse_data);
+int			get_map_from_file(char *file, t_parse_data *parse_data);
 // parse/parse
-void	free_parse_data(t_parse_data *parse_data);
-int		parse_file(char *file, t_parse_data *parse_data);
-void	dump_map(t_parse_data *parse_data);
+void		free_parse_data(t_parse_data *parse_data);
+int			parse_file(char *file, t_parse_data *parse_data);
+void		dump_map(t_parse_data *parse_data);
 // parse/parse utils
-int		line_is_map_content(char *line);
-void	set_parse_errno(t_parse_data *parse_data, int n);
-void	print_parsing_error(int	err);
+int			line_is_map_content(char *line);
+void		set_parse_errno(t_parse_data *parse_data, int n);
+void		print_parsing_error(int	err);
 // parse/format check
-int		file_format_error(char *file, t_parse_data *parse_data);
-int		filename_has_cub_extension(char *filename);
+int			file_format_error(char *file, t_parse_data *parse_data);
+int			filename_has_cub_extension(char *filename);
 // parse/map check
-int	is_map_valid(t_parse_data *parse_data);
+int			is_map_valid(t_parse_data *parse_data);
 
 
 
 // render/utils.c
-void	frame_draw_pixel(t_frame frame, t_pixel_pos p, int color);
-void	clear_frame(t_frame frame);
-int		ft_abs(int n);
-int		is_pixel_outside_window(t_pixel_pos pixel);
-void	put_frame_to_window(t_cub3d *cub3d);
+void		frame_draw_pixel(t_frame frame, t_pixel_pos p, int color);
+void		clear_frame(t_frame frame);
+int			ft_abs(int n);
+int			is_pixel_outside_window(t_pixel_pos pixel);
+void		put_frame_to_window(t_cub3d *cub3d);
 // render/draw_line.c
-void	frame_draw_line(t_frame frame,
-			t_pixel_pos p1, t_pixel_pos p2, int color);
+void		frame_draw_line(t_frame frame,
+				t_pixel_pos p1, t_pixel_pos p2, int color);
 // render/minimap.c
-void	frame_draw_minimap(t_cub3d *cub3d);
+void		frame_draw_minimap(t_cub3d *cub3d);
+
+
+
+//draw_ray/init_player.c
+void		init_player_data(t_cub3d	*data);
+//draw_ray/check_vertical.c
+t_ray_data	*check_for_vertical_wall(t_cub3d *data, t_ray_data *ray_elem);
+//draw_ray/check_horizontal.c
+t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem);
+//draw_ray/draw3d.c
+
+//draw_ray/calc_ray.c
+inline long	pitagora(float ax, float ay, float bx, float by, float ang);
+void		secure_angle(float angle);
+void		draw_ray(t_cub3d *data);
 
 
 #endif
