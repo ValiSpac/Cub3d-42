@@ -33,7 +33,9 @@ static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 	{
 		ray->ry = player->py;
 		ray->rx = player->px;
-		*ok = 1;
+		ray->yo = 0;
+		ray->xo = RES;
+		*ok = 0;
 	}
 }
 

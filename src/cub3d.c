@@ -25,7 +25,6 @@ int	main(int argc, char **argv)
 		return (print_parsing_error(cub3d.parse.parse_errno),
 			cub3d_destroy_mlx(cub3d), free_parse_data(&cub3d.parse), 2);
 	init_player_data(&cub3d);
-	printf("ppos=%d;%d\n", cub3d.player.px, cub3d.player.py);
 	set_hooks(&cub3d);
 	mlx_loop(cub3d.mlx);
 	free_parse_data(&cub3d.parse);
@@ -37,9 +36,11 @@ static int	cub3d_loop(t_cub3d *cub3d)
 {
 	cub3d->ray_list = 0;
 	draw_ray(cub3d);
+	update_player_pos(&cub3d->player);
 	frame_draw_minimap(cub3d);
 	if (cub3d->ray_list)
 		free(cub3d->ray_list);
+	//printf("nigg=%d;%d\n", cub3d->player.move_pa_right, cub3d->player.move_pa_left);
 	if (cub3d->exit)
 		mlx_loop_end(cub3d->mlx);
 	return (0);
@@ -49,11 +50,7 @@ static void	set_hooks(t_cub3d *cub3d)
 {
 	cub3d->exit = 0;
 	mlx_loop_hook(cub3d->mlx, &cub3d_loop, cub3d);
-	mlx_hook(cub3d->window, KeyRelease, KeyReleaseMask, &handle_keydown, cub3d);
+	mlx_hook(cub3d->window, KeyPress, KeyPressMask, &handle_keydown, cub3d);
+	mlx_hook(cub3d->window, KeyRelease, KeyReleaseMask, &handle_keyup, cub3d);
 	mlx_hook(cub3d->window, DestroyNotify, NoEventMask, &handle_window_kill, cub3d);
-	mlx_hook(cub3d->window, ButtonPress, ButtonPressMask, &handle_mousedown, cub3d);
-	mlx_hook(cub3d->window, ButtonRelease, ButtonReleaseMask,
-		&handle_mouseup, cub3d);
-	mlx_hook(cub3d->window, MotionNotify, PointerMotionMask,
-		&handle_mouse_move, cub3d);
 }
