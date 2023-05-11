@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/11 16:07:00 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/11 16:45:00 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 
 # define WINDOW_WIDTH 2400
 # define WINDOW_HEIGHT 1400
-# define PI 3.141592
-# define PI2 1.570796
-# define PI3 4.712388
+# define PI 3.1415
+# define PI2 1.5707
+# define PI3 4.7123
 # define E 0
 # define W PI
 # define N PI2
 # define S PI3
 # define RES 64
-# define DEG 0.0174532888
+# define DEG 0.017453
 # define RAY_PER_DEGREE 1
 
 typedef struct s_pixel_pos	t_pixel_pos;

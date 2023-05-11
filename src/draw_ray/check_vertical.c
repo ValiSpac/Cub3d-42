@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:13:32 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/11 16:11:39 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/11 16:44:33 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 						float aTan, int *ok)
 {
-	if (cos(ray->ra) < 0.001)
+	if (cos(ray->ra) < 0.00001)
 	{
 		ray->rx = (((int)player->pdx >> 6) << 6) - 0.0001;
 		ray->ry = ((player->pdx - ray->rx) * aTan + player->pdy);
 		ray->xo = -RES;
 		ray->yo = -ray->xo * aTan;
 	}
-	else if (cos(ray->ra) > -0.001)
+	else if (cos(ray->ra) > -0.00001)
 	{
 		ray->rx = (((int)player->pdx >> 6) << 6) + RES;
 		ray->ry = ((player->pdx - ray->rx) * aTan + player->pdy);
@@ -31,8 +31,9 @@ static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 	}
 	else
 	{
-		ray->ry = player->py;
-		ray->rx = player->px;
+		dprintf(2, "%f====%f=====%f\n",ray->ra, ray->ry, ray->rx);
+		ray->ry = player->pdy;
+		ray->rx = player->pdx;
 		*ok = 1;
 	}
 }
