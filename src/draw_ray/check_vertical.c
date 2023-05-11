@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_vertical.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:13:32 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/10 19:15:43 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:11:39 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 						float aTan, int *ok)
 {
-	if (ray->ra > PI2 && ray->ra < PI3)
+	if (cos(ray->ra) < 0.001)
 	{
 		ray->rx = (((int)player->pdx >> 6) << 6) - 0.0001;
 		ray->ry = ((player->pdx - ray->rx) * aTan + player->pdy);
 		ray->xo = -RES;
 		ray->yo = -ray->xo * aTan;
 	}
-	else if (ray->ra > PI3 || ray->ra < PI2)
+	else if (cos(ray->ra) > -0.001)
 	{
 		ray->rx = (((int)player->pdx >> 6) << 6) + RES;
 		ray->ry = ((player->pdx - ray->rx) * aTan + player->pdy);
 		ray->xo = RES;
 		ray->yo = -ray->xo * aTan;
 	}
-	else if (ray->ra == 0 || ray->ra == PI)
+	else
 	{
 		ray->ry = player->py;
 		ray->rx = player->px;

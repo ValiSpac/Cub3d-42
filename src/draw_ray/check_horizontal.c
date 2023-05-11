@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   check_horizontal.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:31:28 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/10 19:22:41 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:14:12 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,21 +15,21 @@
 static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 						float aTan, int *ok)
 {
-	if (ray->ra > PI)
+	if (sin(ray->ra) > 0.001)
 	{
 		ray->ry = (((int)player->pdy >> 6) << 6) - 0.0001;
 		ray->rx = ((player->pdy - ray->ry) * aTan + player->pdx);
 		ray->yo = -RES;
 		ray->xo = -ray->yo * aTan;
 	}
-	else if (ray->ra < PI)
+	else if (sin(ray->ra) < -0.001)
 	{
 		ray->ry = (((int)player->pdy >> 6) << 6) + RES;
 		ray->rx = ((player->pdy - ray->ry) * aTan + player->pdx);
-		ray->yo = -RES;
+		ray->yo = RES;
 		ray->xo = -ray->yo * aTan;
 	}
-	else if (ray->ra == 0 || ray->ra == PI)
+	else
 	{
 		ray->ry = player->py;
 		ray->rx = player->px;
@@ -54,7 +54,7 @@ t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem)
 
 	ok = 0;
 	ray = ray_elem;
-	aTan = -(1.0 / tan(ray->ra));
+	aTan = 1.0 / tan(ray->ra);
 	player = &(data->player);
 	get_distance_to_hor_wall(player, ray, aTan, &ok);
 	while (!ok)

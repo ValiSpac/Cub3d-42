@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/10 15:57:03 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/11 16:07:00 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,15 +26,15 @@
 
 # define WINDOW_WIDTH 2400
 # define WINDOW_HEIGHT 1400
-# define PI 3.14159265359
-# define PI2 1.57079632679
-# define PI3 4.71238898038
+# define PI 3.141592
+# define PI2 1.570796
+# define PI3 4.712388
 # define E 0
 # define W PI
 # define N PI2
 # define S PI3
 # define RES 64
-# define DEG 0.017453
+# define DEG 0.0174532888
 # define RAY_PER_DEGREE 1
 
 typedef struct s_pixel_pos	t_pixel_pos;
