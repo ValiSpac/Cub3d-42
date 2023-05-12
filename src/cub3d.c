@@ -13,6 +13,7 @@
 #include "cub3d.h"
 
 static void	set_hooks(t_cub3d *cub3d);
+static void	cub3d_free(t_cub3d *cub3d);
 
 int	main(int argc, char **argv)
 {
@@ -24,13 +25,21 @@ int	main(int argc, char **argv)
 		return (print_err("MLX error."), 1);
 	if (parse_file(argv[1], &cub3d.parse) != 0)
 		return (print_parsing_error(cub3d.parse.parse_errno),
-			cub3d_destroy_mlx(cub3d), free_parse_data(&cub3d.parse), 2);
+			cub3d_free(&cub3d), 2);
+	if (load_textures(&cub3d) != 0)
+		return (print_err("Failed to load textures."),
+			cub3d_free(&cub3d), 3);
 	init_player_data(&cub3d);
 	set_hooks(&cub3d);
 	mlx_loop(cub3d.mlx);
-	free_parse_data(&cub3d.parse);
-	cub3d_destroy_mlx(cub3d);
+	cub3d_free(&cub3d);
 	return (0);
+}
+
+static void	cub3d_free(t_cub3d *cub3d)
+{
+	free_parse_data(&cub3d->parse);
+	cub3d_destroy_mlx(*cub3d);
 }
 
 static int	cub3d_loop(t_cub3d *cub3d)

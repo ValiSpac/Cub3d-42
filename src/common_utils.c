@@ -50,6 +50,14 @@ void	cub3d_destroy_mlx(t_cub3d cub3d)
 {
 	mlx_destroy_window(cub3d.mlx, cub3d.window);
 	mlx_destroy_image(cub3d.mlx, cub3d.frame.mlx_img);
+	if (cub3d.N_texture.frame.mlx_img)
+		mlx_destroy_image(cub3d.mlx, cub3d.N_texture.frame.mlx_img);
+	if (cub3d.S_texture.frame.mlx_img)
+		mlx_destroy_image(cub3d.mlx, cub3d.S_texture.frame.mlx_img);
+	if (cub3d.W_texture.frame.mlx_img)
+		mlx_destroy_image(cub3d.mlx, cub3d.W_texture.frame.mlx_img);
+	if (cub3d.E_texture.frame.mlx_img)
+		mlx_destroy_image(cub3d.mlx, cub3d.E_texture.frame.mlx_img);
 	mlx_destroy_display(cub3d.mlx);
 	free(cub3d.mlx);
 }

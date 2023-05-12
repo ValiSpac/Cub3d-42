@@ -24,8 +24,8 @@
 
 # include <stdio.h>
 
-# define WINDOW_WIDTH 2400
-# define WINDOW_HEIGHT 1400
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 700
 # define PI 3.1495
 # define PI2 1.5707
 # define PI3 4.7123
@@ -35,10 +35,10 @@
 # define S PI3
 # define RES 64
 # define DEG 0.01749
-# define RAY_PER_DEGREE 1
+# define RAY_PER_DEGREE 10
 
 #define PLAYER_SPEED 5.0
-#define PLAYER_ANGLE_SPEED 8.0
+#define PLAYER_ANGLE_SPEED 2.0
 #define SLIDE_DISTANCE 0.3
 
 
@@ -55,6 +55,14 @@ struct s_frame {
 	int		bpp;
 	int		line_len;
 	int		endian;
+};
+
+typedef struct s_texture	t_texture;
+struct s_texture
+{
+	t_frame	frame;
+	int		width;
+	int		height;
 };
 
 typedef struct s_parse_data	t_parse_data;
@@ -111,6 +119,10 @@ struct s_cub3d
 	void			*window;
 	t_parse_data	parse;
 	t_frame			frame;
+	t_texture		N_texture;
+	t_texture		S_texture;
+	t_texture		W_texture;
+	t_texture		E_texture;
 	t_player_data	player;
 	t_ray_data		*ray_list;
 	int				ray_count;
@@ -172,6 +184,8 @@ void		frame_draw_line(t_frame frame,
 // render/minimap.c
 void		frame_draw_minimap(t_cub3d *cub3d);
 
+// render/texture.c
+int			load_textures(t_cub3d *cub3d);
 
 
 //draw_ray/init_player.c
