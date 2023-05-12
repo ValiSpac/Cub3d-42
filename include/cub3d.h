@@ -24,8 +24,8 @@
 
 # include <stdio.h>
 
-# define WINDOW_WIDTH 1200
-# define WINDOW_HEIGHT 700
+# define WINDOW_WIDTH 2000
+# define WINDOW_HEIGHT 800
 # define PI 3.1495
 # define PI2 1.5707
 # define PI3 4.7123
@@ -35,7 +35,7 @@
 # define S PI3
 # define RES 64
 # define DEG 0.01749
-# define RAY_PER_DEGREE 1
+# define RAY_PER_DEGREE 16
 
 #define PLAYER_SPEED 5.0
 #define PLAYER_ANGLE_SPEED 2.0
@@ -184,10 +184,12 @@ void		frame_draw_line(t_frame frame,
 				t_pixel_pos p1, t_pixel_pos p2, int color);
 // render/minimap.c
 void		frame_draw_minimap(t_cub3d *cub3d);
-
 // render/texture.c
 int			load_textures(t_cub3d *cub3d);
 int			are_textures_valid(t_cub3d *cub3d);
+int			texture_get_pixel(t_texture texture, t_pixel_pos p);
+// render/background.c
+void	draw_background(t_cub3d *cub3d);
 
 //draw_ray/init_player.c
 void		init_player_data(t_cub3d	*data);

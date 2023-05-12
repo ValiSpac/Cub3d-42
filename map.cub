@@ -1,4 +1,9 @@
-C 225,30,0
+
+
+
+
+
+C  40,40,40
 NO ./north.xpm
 
 
@@ -8,7 +13,7 @@ NO ./north.xpm
      EA ./east.xpm
 
 
-F  210,100,0
+F  100,0,140
 
    WE                ./west.xpm
 

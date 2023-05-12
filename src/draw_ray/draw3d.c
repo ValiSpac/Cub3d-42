@@ -12,23 +12,12 @@
 
 #include "cub3d.h"
 
-void		draw_texture_pillar(t_cub3d *data, t_ray_data ray,
+static void		draw_texture_pillar(t_cub3d *data, t_ray_data ray,
 	t_pixel_pos src, t_pixel_pos dst);
-t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray);
-int			get_ray_hit_pos(t_ray_data ray);
-void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
+static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray);
+static int			get_ray_hit_pos(t_ray_data ray);
+static void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
 	t_pixel_pos window_src, int window_line_h, int texture_x);
-
-int	texture_get_pixel(t_texture texture, t_pixel_pos p)
-{
-	char	*pixel;
-
-	if (p.x < 0 || p.y < 0 || p.x >= texture.width || p.y >= texture.height)
-		return (0);
-	pixel = texture.frame.addr + (4) * (p.x + p.y * texture.width);
-	return (*(int *)pixel);
-}
-
 
 void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 {
@@ -55,7 +44,7 @@ void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 	draw_texture_pillar(data, ray, ray_pixel, dst);
 }
 
-void	draw_texture_pillar(t_cub3d *data, t_ray_data ray, t_pixel_pos src, t_pixel_pos dst)
+static void	draw_texture_pillar(t_cub3d *data, t_ray_data ray, t_pixel_pos src, t_pixel_pos dst)
 {
 	t_texture	*texture;
 	int			height;
@@ -71,7 +60,7 @@ void	draw_texture_pillar(t_cub3d *data, t_ray_data ray, t_pixel_pos src, t_pixel
 	}
 }
 
-void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
+static void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
 	t_pixel_pos window_src, int window_line_h, int texture_x)
 {
 	t_pixel_pos	window_pos;
@@ -91,8 +80,7 @@ void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
 	}
 }
 
-
-int	get_ray_hit_pos(t_ray_data ray)
+static int	get_ray_hit_pos(t_ray_data ray)
 {
 	if (ray.hit_horizontal)
 	{
@@ -105,7 +93,7 @@ int	get_ray_hit_pos(t_ray_data ray)
 	return (((int)ray.ry % RES));
 }
 
-t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray)
+static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray)
 {
 	if (ray.hit_horizontal)
 	{

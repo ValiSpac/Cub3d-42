@@ -46,10 +46,12 @@ static int	fill_color_data_from_line_split(char **line_split,
 	char	**color_split;
 
 	color_split = ft_split(line_split[1], ',');
-	if (!color_split || !color_split[0] || !color_split[1]
+	if (!color_split)
+		return (1);
+	if (!color_split[0] || !color_split[1]
 		|| !color_split[2] || color_split[3]
 		|| !is_color_valid(color_split))
-		return (set_parse_errno(parse_data, 7), 1);
+		return (ft_split_free(color_split), set_parse_errno(parse_data, 7), 1);
 	if (!ft_strncmp(line_split[0], "F", 1))
 	{
 		parse_data->FC = (ft_atoi(color_split[0]) << 16)

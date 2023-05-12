@@ -42,14 +42,11 @@ void	clear_frame(t_frame frame)
 	}
 }
 
-void	frame_draw_pixel(t_frame frame, t_pixel_pos p, int color)
+inline void	frame_draw_pixel(t_frame frame, t_pixel_pos p, int color)
 {
-	char	*pixel;
-
 	if (p.x < 0 || p.y < 0 || p.x >= WINDOW_WIDTH || p.y >= WINDOW_HEIGHT)
 		return ;
-	pixel = frame.addr + (4) * (p.x + p.y * WINDOW_WIDTH);
-	*(int *)pixel = color;
+	*(int *)(frame.addr + (4) * (p.x + p.y * WINDOW_WIDTH)) = color;
 }
 
 void	put_frame_to_window(t_cub3d *cub3d)

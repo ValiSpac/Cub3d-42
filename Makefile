@@ -14,7 +14,7 @@ SRCS		=	./src/cub3d.c ./src/common_utils.c ./src/events.c \
 				./src/render/render_utils.c ./src/render/draw_line.c ./src/render/minimap.c \
 				./src/draw_ray/calc_ray.c ./src/draw_ray/check_horizontal.c ./src/draw_ray/check_vertical.c \
 				./src/draw_ray/init_player.c ./src/draw_ray/draw3d.c \
-				./src/controls.c ./src/render/texture.c
+				./src/controls.c ./src/render/texture.c ./src/render/background.c
 MLX_DIR		=	./minilibx
 MLX			=	$(MLX_DIR)/libmlx_Linux.a
 
