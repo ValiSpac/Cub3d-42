@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:20:35 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/10 17:54:16 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:05:50 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define MINIMAP_SCALE 64
+#define MINIMAP_SCALE 15
 // void	frame_draw_line(t_frame frame,
 // 	t_pixel_pos p1, t_pixel_pos p2, int color);
 
@@ -33,17 +33,19 @@ void	frame_draw_minimap(t_cub3d *cub3d)
 
 void	frame_draw_rays(t_cub3d *cub3d)
 {
-	int	i;
+	int			i;
+	float		coef;
 	t_pixel_pos	dst;
 	t_pixel_pos	player_pos;
 
-	player_pos.x = cub3d->player.pdx;
-	player_pos.y = cub3d->player.pdy;
+	coef = (float)MINIMAP_SCALE / (float)RES;
+	player_pos.x = cub3d->player.pdx * coef;
+	player_pos.y = cub3d->player.pdy * coef;
 	i = 0;
 	while (i < cub3d->ray_count)
 	{
-		dst.x = (int)cub3d->ray_list[i].rx;
-		dst.y = (int)cub3d->ray_list[i].ry;
+		dst.x = (int)(cub3d->ray_list[i].rx * coef);
+		dst.y = (int)(cub3d->ray_list[i].ry * coef);
 		frame_draw_line(cub3d->frame, dst, player_pos, 255);
 		i++;
 	}

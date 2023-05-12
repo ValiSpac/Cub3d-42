@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/11 16:45:00 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/11 17:23:59 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,6 @@ t_ray_data	*check_for_vertical_wall(t_cub3d *data, t_ray_data *ray_elem);
 t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem);
 //draw_ray/draw3d.c
 void	draw3d(t_cub3d *data, t_ray_data ray);
-
 //draw_ray/calc_ray.c
 long		pitagora(float ax, float ay, float bx, float by);
 void		secure_angle(float angle);

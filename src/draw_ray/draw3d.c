@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:07:48 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/10 17:45:36 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/11 17:26:00 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,18 @@
 
 void	draw3d(t_cub3d *data, t_ray_data ray)
 {
-	float	disW;
+	int			lineH;
+	float		disW;
+	float		ca;
+	t_pixel_pos	dst;
 
-	disW = 10000000;
+	disW = 0;
 	disW = pitagora(data->player.px, data->player.py, ray.rx, ray.ry);
-	(void)disW;
-	//printf("OFSET x=%f, y=%f\n", ray.xo, ray.yo);
+	ca = data->player.pa - ray.ra;
+	secure_angle(ca);
+	disW = disW * cos(ca);
+	lineH = (RES * WINDOW_HEIGHT) / disW;
+	if (lineH > WINDOW_HEIGHT)
+		lineH = WINDOW_HEIGHT;
+
 }
