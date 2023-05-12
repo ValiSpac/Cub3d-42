@@ -39,6 +39,8 @@
 
 #define PLAYER_SPEED 5.0
 #define PLAYER_ANGLE_SPEED 8.0
+#define SLIDE_DISTANCE 0.3
+
 
 typedef struct s_pixel_pos	t_pixel_pos;
 struct s_pixel_pos {
@@ -129,7 +131,7 @@ int			handle_keyup(int keysym, t_cub3d *cub3d);
 int			handle_window_kill(t_cub3d *cub3d);
 
 // controls
-void	update_player_pos(t_player_data *data);
+void	update_player_pos(t_cub3d *data);
 
 // parse/get_data_utils
 int			have_missing_data(t_parse_data *parse_data);

@@ -36,7 +36,7 @@ static int	cub3d_loop(t_cub3d *cub3d)
 {
 	cub3d->ray_list = 0;
 	draw_ray(cub3d);
-	update_player_pos(&cub3d->player);
+	update_player_pos(cub3d);
 	frame_draw_minimap(cub3d);
 	if (cub3d->ray_list)
 		free(cub3d->ray_list);
