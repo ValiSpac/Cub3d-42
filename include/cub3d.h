@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/12 13:48:39 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 14:29:05 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,8 @@
 
 #define PLAYER_SPEED 5.0
 #define PLAYER_ANGLE_SPEED 8.0
+#define SLIDE_DISTANCE 0.3
+
 
 typedef struct s_pixel_pos	t_pixel_pos;
 struct s_pixel_pos {
