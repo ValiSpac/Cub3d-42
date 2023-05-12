@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:36:39 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/12 12:36:45 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 16:59:47 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	draw_ray(t_cub3d *data)
 		vertical_inter = *check_for_vertical_wall(data, &ray_list[i]);
 		ray_list[i] = check_for_shortest_line(&(data->player), horizontal_inter,
 										vertical_inter);
-		//draw3d(data, ray_list[i]);
+		draw3d(data, ray_list[i], i);
 		if (i + 1 < (player->fov * RAY_PER_DEGREE))
 		{
 			ray_list[i + 1].ra = ray_list[i].ra + DEG / RAY_PER_DEGREE;

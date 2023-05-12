@@ -6,15 +6,13 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:20:35 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/12 14:22:52 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 17:10:23 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-#define MINIMAP_SCALE WINDOW_WIDTH / 128
-// void	frame_draw_line(t_frame frame,
-// 	t_pixel_pos p1, t_pixel_pos p2, int color);
+#define MINIMAP_SCALE 10
 
 void	frame_draw_block(t_cub3d *cub3d, int y_start, int x_start, int color);
 void	frame_draw_2d_map(t_cub3d *cub3d);
@@ -24,11 +22,9 @@ void	frame_draw_rays(t_cub3d *cub3d);
 
 void	frame_draw_minimap(t_cub3d *cub3d)
 {
-	clear_frame(cub3d->frame);
 	frame_draw_2d_map(cub3d);
-	frame_draw_rays(cub3d);
+	(void)frame_draw_rays(cub3d);
 	frame_draw_player(cub3d, cub3d->player.pdy / 64.0, cub3d->player.pdx / 64.0);
-	put_frame_to_window(cub3d);
 }
 
 void	frame_draw_rays(t_cub3d *cub3d)

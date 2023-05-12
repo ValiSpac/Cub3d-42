@@ -62,10 +62,10 @@ static void	player_move(t_cub3d *data, float x_add, float y_add)
 			data->player.pdy += get_max_player_y_move(data, min_float(step, y_add));
 		data->player.py = (int)data->player.pdy;
 		x_add -= step;
-		y_add -= step;	
+		y_add -= step;
 	}
-	data->px = data->pdx;
-	data->py = data->pdy;
+	data->player.px = data->player.pdx;
+	data->player.py = data->player.pdy;
 }
 
 static float	get_max_player_x_move(t_cub3d *data, float x_want)
@@ -75,7 +75,7 @@ static float	get_max_player_x_move(t_cub3d *data, float x_want)
 
 	if (x_want < 0)
 		map_x_want = data->player.pdx + x_want - ((float)SLIDE_DISTANCE * RES);
-	else	
+	else
 		map_x_want = data->player.pdx + x_want + ((float)SLIDE_DISTANCE * RES);
 	map_x_want /= RES;
 	map_y = data->player.pdy / (float)RES;
@@ -97,7 +97,7 @@ static float	get_max_player_y_move(t_cub3d *data, float y_want)
 
 	if (y_want < 0)
 		map_y_want = data->player.pdy + y_want - ((float)SLIDE_DISTANCE * RES);
-	else	
+	else
 		map_y_want = data->player.pdy + y_want + ((float)SLIDE_DISTANCE * RES);
 	map_y_want /= RES;
 	map_x = data->player.pdx / (float)RES;

@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:27:33 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/12 13:50:51 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 16:10:40 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,12 @@ int	main(int argc, char **argv)
 
 static int	cub3d_loop(t_cub3d *cub3d)
 {
+	clear_frame(cub3d->frame);
 	cub3d->ray_list = 0;
 	draw_ray(cub3d);
 	update_player_pos(cub3d);
 	frame_draw_minimap(cub3d);
+	put_frame_to_window(cub3d);
 	if (cub3d->ray_list)
 		free(cub3d->ray_list);
 	if (cub3d->exit)
