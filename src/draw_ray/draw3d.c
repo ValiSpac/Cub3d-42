@@ -36,11 +36,9 @@ void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 	int			disW;
 	int			lineO;
 	float		ca;
-	int			i;
 	t_pixel_pos	ray_pixel;
 	t_pixel_pos	dst;
 
-	i = 0;
 	ca = data->player.pa - ray.ra;
 	secure_angle(ca);
 	disW = (int)pitagora(data->player.px, data->player.py, ray.rx, ray.ry);
@@ -48,8 +46,6 @@ void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 	lineH = (RES * WINDOW_HEIGHT) / disW;
 	if (lineH > WINDOW_HEIGHT)
 		lineH = WINDOW_HEIGHT;
-
-	////
 	lineO = WINDOW_HEIGHT - (WINDOW_HEIGHT / 2 - lineH / 2);
 	ray_pixel.x = ray_num * (int)(WINDOW_WIDTH / (data->player.fov * RAY_PER_DEGREE));
 	ray_pixel.y = lineO - lineH;
@@ -57,40 +53,22 @@ void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 	dst.y = lineO;
 	dst.x += (int)(WINDOW_WIDTH / (data->player.fov * RAY_PER_DEGREE));
 	draw_texture_pillar(data, ray, ray_pixel, dst);
-	////
-
-	lineO = WINDOW_HEIGHT - (WINDOW_HEIGHT / 2 - lineH / 2);
-	ray_pixel.x = ray_num * (int)(WINDOW_WIDTH / (data->player.fov * RAY_PER_DEGREE));
-	ray_pixel.y = lineO;
-	dst.x = ray_pixel.x;
-	dst.y = ray_pixel.y - lineH;
-	while (i < (int)(WINDOW_WIDTH / (data->player.fov * RAY_PER_DEGREE)))
-	{
-		ray_pixel.x += 1;
-		dst.x = ray_pixel.x;
-		//frame_draw_line(data->frame, ray_pixel, dst, 16711680);
-		i++;
-	}
 }
 
 void	draw_texture_pillar(t_cub3d *data, t_ray_data ray, t_pixel_pos src, t_pixel_pos dst)
 {
 	t_texture	*texture;
-	int			ray_hit_pos;
-	int			width;
 	int			height;
+	int			ray_hit_pos;
 
-	(void)data;
-	(void)src;
-	(void)dst;
-	(void)texture;
-	(void)ray_hit_pos;
-	(void)width;
 	texture = get_ray_texture(data, ray);
 	ray_hit_pos = get_ray_hit_pos(ray);
-	width = dst.x - src.x;
 	height = dst.y - src.y;
-	frame_draw_texture_line(data, texture, src, height, ray_hit_pos);
+	while (src.x < dst.x)
+	{
+		frame_draw_texture_line(data, texture, src, height, ray_hit_pos);
+		src.x++;
+	}
 }
 
 void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
@@ -100,7 +78,6 @@ void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
 	t_pixel_pos	texture_pos;
 	int	i;
 
-	(void)window_line_h;
 	i = 0;
 	window_pos.x = window_src.x;
 	window_pos.y = window_src.y;
@@ -120,8 +97,8 @@ int	get_ray_hit_pos(t_ray_data ray)
 	if (ray.hit_horizontal)
 	{
 		if (ray.yo > 0.0)
-			return (RES - ((int)ray.rx % RES) - 1);
-		return (((int)ray.rx % RES));
+			return (((int)ray.rx % RES));
+		return (RES - ((int)ray.rx % RES) - 1);
 	}
 	if (ray.xo > 0.0)
 		return (RES - ((int)ray.ry % RES) - 1);

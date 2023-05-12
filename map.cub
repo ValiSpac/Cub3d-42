@@ -1,16 +1,16 @@
 C 225,30,0
-NO ./hey.xpm
+NO ./north.xpm
 
 
- SO ./hey.xpm
+ SO ./south.xpm
 
 
-     EA ./hey.xpm
+     EA ./east.xpm
 
 
 F  210,100,0
 
-   WE                ./hey.xpm
+   WE                ./west.xpm
 
 
 

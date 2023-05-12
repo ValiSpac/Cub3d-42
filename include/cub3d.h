@@ -35,7 +35,7 @@
 # define S PI3
 # define RES 64
 # define DEG 0.01749
-# define RAY_PER_DEGREE 16
+# define RAY_PER_DEGREE 1
 
 #define PLAYER_SPEED 5.0
 #define PLAYER_ANGLE_SPEED 2.0
