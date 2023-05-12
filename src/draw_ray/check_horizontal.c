@@ -6,14 +6,14 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 16:31:28 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/11 16:47:38 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 11:43:09 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
-						float aTan, int *ok)
+						float aTan)
 {
 	if (sin(ray->ra) > 0.00001)
 	{
@@ -31,18 +31,10 @@ static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 	}
 	else
 	{
-<<<<<<< HEAD
 		ray->ry = player->pdy;
 		ray->rx = player->pdx;
 		ray->xo = 64;
 		ray->yo = 0;
-=======
-		ray->ry = player->py;
-		ray->rx = player->px;
-		ray->yo = 0;
-		ray->xo = RES;
->>>>>>> player-movement
-		*ok = 0;
 	}
 }
 
@@ -65,7 +57,7 @@ t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem)
 	ray = ray_elem;
 	aTan = 1.0 / tan(ray->ra);
 	player = &(data->player);
-	get_distance_to_hor_wall(player, ray, aTan, &ok);
+	get_distance_to_hor_wall(player, ray, aTan);
 	while (!ok)
 	{
 		ray->mx = (int)(ray->rx) >> 6;

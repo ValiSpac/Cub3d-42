@@ -6,17 +6,13 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:20:35 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/11 17:05:50 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 11:43:48 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-<<<<<<< HEAD
 #define MINIMAP_SCALE 15
-=======
-#define MINIMAP_SCALE 32
->>>>>>> player-movement
 // void	frame_draw_line(t_frame frame,
 // 	t_pixel_pos p1, t_pixel_pos p2, int color);
 
