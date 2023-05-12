@@ -27,4 +27,6 @@ void	update_player_pos(t_player_data *data)
 		data->pdx -= (float)PLAYER_SPEED * cos(data->pa);
 		data->pdy += (float)PLAYER_SPEED * sin(data->pa);
 	}
+	data->px = data->pdx;
+	data->py = data->pdy;
 }

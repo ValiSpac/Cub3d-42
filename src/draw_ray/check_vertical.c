@@ -6,14 +6,14 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:13:32 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/11 16:52:37 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 12:42:46 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
-						float aTan, int *ok)
+						float aTan)
 {
 	if (cos(ray->ra) < 0.00001)
 	{
@@ -33,7 +33,8 @@ static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 	{
 		ray->ry = player->pdy;
 		ray->rx = player->pdx;
-		*ok = 1;
+		ray->yo = 64;
+		ray->xo = 0;
 	}
 }
 
@@ -56,7 +57,7 @@ t_ray_data	*check_for_vertical_wall(t_cub3d *data, t_ray_data *ray_elem)
 	ray = ray_elem;
 	aTan = tan(ray->ra);
 	player = &(data->player);
-	get_distance_to_hor_wall(player, ray, aTan, &ok);
+	get_distance_to_hor_wall(player, ray, aTan);
 	while (!ok)
 	{
 		ray->mx = (int)(ray->rx) >> 6;

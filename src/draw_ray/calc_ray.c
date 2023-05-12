@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:36:39 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/11 16:53:16 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 12:36:45 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ void	draw_ray(t_cub3d *data)
 
 	i = 0;
 	player = &(data->player);
-	ray_list = malloc(sizeof(t_ray_data) * (player->fov * RAY_PER_DEGREE));
+	ray_list = malloc(sizeof(t_ray_data) * (player->fov * RAY_PER_DEGREE) + 1);
 	if (!ray_list)
 		return ;
 	ray_list[i].ra = player->pa - (DEG * player->fov / 2.0);

@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/11 17:23:59 by vpac             ###   ########.fr       */
+/*   Updated: 2023/05/12 13:48:39 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 
 # define WINDOW_WIDTH 2400
 # define WINDOW_HEIGHT 1400
-# define PI 3.1415
+# define PI 3.1495
 # define PI2 1.5707
 # define PI3 4.7123
 # define E 0
@@ -34,7 +34,7 @@
 # define N PI2
 # define S PI3
 # define RES 64
-# define DEG 0.017453
+# define DEG 0.01749
 # define RAY_PER_DEGREE 1
 
 #define PLAYER_SPEED 5.0
@@ -129,7 +129,7 @@ int			handle_keyup(int keysym, t_cub3d *cub3d);
 int			handle_window_kill(t_cub3d *cub3d);
 
 // controls
-void	update_player_pos(t_player_data *data);
+void		update_player_pos(t_player_data *data);
 
 // parse/get_data_utils
 int			have_missing_data(t_parse_data *parse_data);
@@ -179,7 +179,7 @@ t_ray_data	*check_for_vertical_wall(t_cub3d *data, t_ray_data *ray_elem);
 //draw_ray/check_horizontal.c
 t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem);
 //draw_ray/draw3d.c
-void	draw3d(t_cub3d *data, t_ray_data ray);
+void		draw3d(t_cub3d *data, t_ray_data ray);
 //draw_ray/calc_ray.c
 long		pitagora(float ax, float ay, float bx, float by);
 void		secure_angle(float angle);
