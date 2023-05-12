@@ -12,7 +12,11 @@
 
 #include "cub3d.h"
 
+<<<<<<< HEAD
 #define MINIMAP_SCALE 15
+=======
+#define MINIMAP_SCALE 32
+>>>>>>> player-movement
 // void	frame_draw_line(t_frame frame,
 // 	t_pixel_pos p1, t_pixel_pos p2, int color);
 

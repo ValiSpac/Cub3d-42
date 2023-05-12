@@ -37,6 +37,9 @@
 # define DEG 0.017453
 # define RAY_PER_DEGREE 1
 
+#define PLAYER_SPEED 5.0
+#define PLAYER_ANGLE_SPEED 8.0
+
 typedef struct s_pixel_pos	t_pixel_pos;
 struct s_pixel_pos {
 	int	x;
@@ -78,6 +81,12 @@ struct s_player_data
 	int		px;//grid x position
 	int		py;//grid y position
 	float	pa;//player angle
+	int		move_forward;
+	int		move_backward;
+	int		move_right;
+	int		move_left;
+	int		move_pa_left;
+	int		move_pa_right;
 };
 
 typedef struct s_ray_data		t_ray_data;
@@ -116,12 +125,11 @@ void		cub3d_destroy_mlx(t_cub3d cub3d);
 
 // events
 int			handle_keydown(int keysym, t_cub3d *cub3d);
+int			handle_keyup(int keysym, t_cub3d *cub3d);
 int			handle_window_kill(t_cub3d *cub3d);
-int			handle_mousedown(int button, int x, int y, t_cub3d *cub3d);
-int			handle_mouseup(int button, int x, int y, t_cub3d *cub3d);
-int			handle_mouse_move(int x, int y, t_cub3d *cub3d);
 
-
+// controls
+void	update_player_pos(t_player_data *data);
 
 // parse/get_data_utils
 int			have_missing_data(t_parse_data *parse_data);
