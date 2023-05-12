@@ -8,9 +8,9 @@ static float	get_max_player_y_move(t_cub3d *data, float y_want);
 void	update_player_pos(t_cub3d *data)
 {
 	if (data->player.move_pa_right)
-		data->player.pa -= (float)PLAYER_ANGLE_SPEED / 100.0;
-	if (data->player.move_pa_left)
 		data->player.pa += (float)PLAYER_ANGLE_SPEED / 100.0;
+	if (data->player.move_pa_left)
+		data->player.pa -= (float)PLAYER_ANGLE_SPEED / 100.0;
 	if (data->player.move_right)
 		player_move(data,
 			(float)PLAYER_SPEED * sin(data->player.pa),

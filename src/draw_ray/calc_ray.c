@@ -27,7 +27,11 @@ static t_ray_data	check_for_shortest_line(t_player_data *p, t_ray_data h_inter,
 	disH = pitagora(p->px, p->py, h_inter.rx, h_inter.ry);
 	disV = pitagora(p->px, p->py, v_inter.rx, v_inter.ry);
 	if (disH > disV && disH != pitagora(p->px, p->py, p->px, p->py))
+	{
+		v_inter.hit_horizontal = 0;
 		return (v_inter);
+	}
+	h_inter.hit_horizontal = 1;
 	return (h_inter);
 }
 

@@ -29,3 +29,24 @@ int	load_textures(t_cub3d *cub3d)
 	return (0);
 }
 
+int	are_textures_valid(t_cub3d *cub3d)
+{
+	if (cub3d->N_texture.width != cub3d->N_texture.height
+		|| cub3d->S_texture.width != cub3d->S_texture.height
+		|| cub3d->W_texture.width != cub3d->W_texture.height
+		|| cub3d->E_texture.width != cub3d->E_texture.height)
+		return (0);
+	if (cub3d->N_texture.width != cub3d->S_texture.width
+		|| cub3d->S_texture.width != cub3d->W_texture.width
+		|| cub3d->W_texture.width != cub3d->E_texture.width)
+		return (0);
+	if (cub3d->N_texture.width != RES)
+		return (0);
+	return (1);
+}
+
+int	get_texture_x_start(t_cub3d *cub3d, int res_pos)
+{
+	(void)cub3d;
+	return (res_pos);
+}

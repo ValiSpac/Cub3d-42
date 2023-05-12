@@ -35,7 +35,7 @@
 # define S PI3
 # define RES 64
 # define DEG 0.01749
-# define RAY_PER_DEGREE 10
+# define RAY_PER_DEGREE 16
 
 #define PLAYER_SPEED 5.0
 #define PLAYER_ANGLE_SPEED 2.0
@@ -110,6 +110,7 @@ struct s_ray_data
 	int		mx;
 	int		my;
 	int		mp;
+	int		hit_horizontal;
 };
 
 typedef struct s_cub3d		t_cub3d;
@@ -186,7 +187,7 @@ void		frame_draw_minimap(t_cub3d *cub3d);
 
 // render/texture.c
 int			load_textures(t_cub3d *cub3d);
-
+int			are_textures_valid(t_cub3d *cub3d);
 
 //draw_ray/init_player.c
 void		init_player_data(t_cub3d	*data);

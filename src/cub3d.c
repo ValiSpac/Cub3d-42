@@ -26,8 +26,8 @@ int	main(int argc, char **argv)
 	if (parse_file(argv[1], &cub3d.parse) != 0)
 		return (print_parsing_error(cub3d.parse.parse_errno),
 			cub3d_free(&cub3d), 2);
-	if (load_textures(&cub3d) != 0)
-		return (print_err("Failed to load textures."),
+	if (load_textures(&cub3d) != 0 || !are_textures_valid(&cub3d))
+		return (print_err("Invalid textures."),
 			cub3d_free(&cub3d), 3);
 	init_player_data(&cub3d);
 	set_hooks(&cub3d);
