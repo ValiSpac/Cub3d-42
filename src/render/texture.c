@@ -45,9 +45,7 @@ int	are_textures_valid(t_cub3d *cub3d)
 	return (1);
 }
 
-int	texture_get_pixel(t_texture texture, t_pixel_pos p)
+inline int	texture_get_pixel(t_texture texture, t_pixel_pos p)
 {
-	if (p.x < 0 || p.y < 0 || p.x >= texture.width || p.y >= texture.height)
-		return (0);
 	return (*(int *)(texture.frame.addr + (4) * (p.x + p.y * texture.width)));
 }

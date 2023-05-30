@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   render_utils.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:56:20 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/04 16:17:19 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/05/25 17:17:25 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,6 @@ int	ft_abs(int n)
 	if (n < 0)
 		return (-n);
 	return (n);
-}
-
-int	is_pixel_outside_window(t_pixel_pos pixel)
-{
-	return (pixel.x < 0 || pixel.x > WINDOW_WIDTH
-		|| pixel.x < 0 || pixel.x > WINDOW_WIDTH);
 }
 
 void	clear_frame(t_frame frame)
@@ -44,8 +38,6 @@ void	clear_frame(t_frame frame)
 
 inline void	frame_draw_pixel(t_frame frame, t_pixel_pos p, int color)
 {
-	if (p.x < 0 || p.y < 0 || p.x >= WINDOW_WIDTH || p.y >= WINDOW_HEIGHT)
-		return ;
 	*(int *)(frame.addr + (4) * (p.x + p.y * WINDOW_WIDTH)) = color;
 }
 

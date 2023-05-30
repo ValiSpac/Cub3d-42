@@ -11,11 +11,11 @@ void	update_player_pos(t_cub3d *data)
 		data->player.pa += (float)PLAYER_ANGLE_SPEED / 100.0;
 	if (data->player.move_pa_left)
 		data->player.pa -= (float)PLAYER_ANGLE_SPEED / 100.0;
-	if (data->player.move_right)
+	if (data->player.move_left)
 		player_move(data,
 			(float)PLAYER_SPEED * sin(data->player.pa),
 			(float)PLAYER_SPEED * cos(data->player.pa));
-	if (data->player.move_left)
+	if (data->player.move_right)
 		player_move(data,
 			(float)PLAYER_SPEED * -sin(data->player.pa),
 			(float)PLAYER_SPEED * -cos(data->player.pa));
