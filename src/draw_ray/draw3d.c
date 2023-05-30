@@ -95,12 +95,12 @@ static int	get_ray_hit_pos(t_ray_data ray)
 	if (ray.hit_horizontal)
 	{
 		if (ray.yo > 0.0)
-			return (((int)ray.rx % RES));
-		return (RES - ((int)ray.rx % RES) - 1);
+			return (RES - ((int)ray.rx % RES) - 1);
+		return (((int)ray.rx % RES));
 	}
 	if (ray.xo > 0.0)
-		return (RES - ((int)ray.ry % RES) - 1);
-	return (((int)ray.ry % RES));
+		return (((int)ray.ry % RES));
+	return (RES - ((int)ray.ry % RES) - 1);
 }
 
 static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray)
@@ -112,6 +112,6 @@ static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray)
 		return (&data->N_texture);
 	}
 	if (ray.xo > 0.0)
-		return (&data->E_texture);
-	return (&data->W_texture);
+		return (&data->W_texture);
+	return (&data->E_texture);
 }

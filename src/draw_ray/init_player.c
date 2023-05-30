@@ -32,7 +32,7 @@ void	init_player_data(t_cub3d	*data)
 	int				x;
 
 	player = &(data->player);
-	player->fov = 60;
+	player->fov = 120;
 	y = -1;
 	while (++y < data->parse.map_h)
 	{

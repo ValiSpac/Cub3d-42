@@ -47,7 +47,8 @@ static int	cub3d_loop(t_cub3d *cub3d)
 	clear_frame(cub3d->frame);
 	cub3d->ray_list = 0;
 	draw_background(cub3d);
-	draw_ray(cub3d);
+	cast_rays(cub3d);
+	draw_ray_list(cub3d);
 	update_player_pos(cub3d);
 	frame_draw_minimap(cub3d);
 	put_frame_to_window(cub3d);

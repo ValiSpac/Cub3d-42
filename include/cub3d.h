@@ -24,8 +24,8 @@
 
 # include <stdio.h>
 
-# define WINDOW_WIDTH 2400
-# define WINDOW_HEIGHT 1200
+# define WINDOW_WIDTH 1200
+# define WINDOW_HEIGHT 600
 # define PI 3.1495
 # define PI2 1.5707
 # define PI3 4.7123
@@ -38,7 +38,7 @@
 # define RAY_PER_DEGREE 30
 
 #define PLAYER_SPEED 10.0
-#define PLAYER_ANGLE_SPEED 2.0
+#define PLAYER_ANGLE_SPEED 4.0
 #define SLIDE_DISTANCE 0.3
 
 
@@ -201,7 +201,8 @@ void		draw3d(t_cub3d *data, t_ray_data ray, int ray_num);
 //draw_ray/calc_ray.c
 float		pitagora(float ax, float ay, float bx, float by);
 void		secure_angle(float *angle);
-void		draw_ray(t_cub3d *data);
+void		draw_ray_list(t_cub3d *data);
+void		cast_rays(t_cub3d *data);
 
 
 #endif

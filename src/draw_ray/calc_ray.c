@@ -43,7 +43,22 @@ void	secure_angle(float *angle)
 		*angle -= 2.0 * PI;
 }
 
-void	draw_ray(t_cub3d *data)
+void	draw_ray_list(t_cub3d *data)
+{
+	int	i;
+	int	ray_num;
+
+	ray_num = 0;
+	i = data->ray_count - 1;
+	while (i > 0)
+	{
+		draw3d(data, data->ray_list[i], ray_num);
+		ray_num++;
+		i--;
+	}
+}
+
+void	cast_rays(t_cub3d *data)
 {
 	t_player_data	*player;
 	t_ray_data		*ray_list;
@@ -64,12 +79,8 @@ void	draw_ray(t_cub3d *data)
 		vertical_inter = *check_for_vertical_wall(data, &ray_list[i]);
 		ray_list[i] = check_for_shortest_line(&(data->player), horizontal_inter,
 										vertical_inter);
-		draw3d(data, ray_list[i], i);
 		if (i + 1 < WINDOW_WIDTH)
-		{
 			ray_list[i + 1].ra = ray_list[i].ra + DEG / (WINDOW_WIDTH / player->fov);
-			secure_angle(&ray_list[i + 1].ra);
-		}
 		i++;
 	}
 	data->ray_count = WINDOW_WIDTH;
