@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/27 13:44:05 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/02 15:26:20 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,16 @@
 
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 600
-# define PI 3.1495
-# define PI2 1.5707
-# define PI3 4.7123
+# define PI  3.14159265358979323846
 # define E 0
 # define W PI
-# define N PI2
-# define S PI3
 # define RES 64
-# define DEG 0.01749
+# define DEG 0.0174532925
 # define RAY_PER_DEGREE 30
 
-#define PLAYER_SPEED 10.0
-#define PLAYER_ANGLE_SPEED 4.0
-#define SLIDE_DISTANCE 0.3
-
+# define PLAYER_SPEED 10.0
+# define PLAYER_ANGLE_SPEED 4.0
+# define SLIDE_DISTANCE 0.4
 
 typedef struct s_pixel_pos	t_pixel_pos;
 struct s_pixel_pos {
@@ -86,11 +81,11 @@ typedef struct s_player_data		t_player_data;
 struct s_player_data
 {
 	float	fov;
-	float	pdx;//player x coord
-	float	pdy;//player y coord
-	int		px;//grid x position
-	int		py;//grid y position
-	float	pa;//player angle
+	float	pdx;
+	float	pdy;
+	int		px;
+	int		py;
+	float	pa;
 	int		move_forward;
 	int		move_backward;
 	int		move_right;
@@ -103,10 +98,10 @@ typedef struct s_ray_data		t_ray_data;
 struct s_ray_data
 {
 	float	ra;
-	float	rx;//ray x coord
-	float	ry;//ray y coord
-	float	xo;//ray x offset
-	float	yo;//ray y offset
+	float	rx;
+	float	ry;
+	float	xo;
+	float	yo;
 	int		mx;
 	int		my;
 	int		mp;

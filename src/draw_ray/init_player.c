@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:11:06 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/27 13:45:02 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/02 15:25:00 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static float	get_pa_from_start_point(int start)
 {
 	if (start == 3)
-		return (N);
+		return (PI / 2);
 	if (start == 4)
-		return (S);
+		return (3 * PI / 2);
 	if (start == 5)
 		return (E);
 	if (start == 6)
@@ -32,7 +32,7 @@ void	init_player_data(t_cub3d	*data)
 	int				x;
 
 	player = &(data->player);
-	player->fov = 120;
+	player->fov = 60;
 	y = -1;
 	while (++y < data->parse.map_h)
 	{

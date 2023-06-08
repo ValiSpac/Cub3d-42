@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:07:48 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/27 13:58:37 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/01 12:38:10 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,12 @@
 
 struct s_texturing_data
 {
-	t_pixel_pos src;
-	t_pixel_pos dst;
+	t_pixel_pos	src;
+	t_pixel_pos	dst;
 };
 
 static void		draw_texture_pillar(t_cub3d *data, t_ray_data ray,
-	t_pixel_pos src, t_pixel_pos dst, int t_off);
+					t_pixel_pos src, t_pixel_pos dst, int t_off);
 static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray);
 static int			get_ray_hit_pos(t_ray_data ray);
 static void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
@@ -27,9 +27,9 @@ static void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
 
 void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 {
-	int			lineH;
-	float		disW;
-	int			lineO;
+	int			lineh;
+	float		disw;
+	int			lineo;
 	float		ca;
 	t_pixel_pos	ray_pixel;
 	t_pixel_pos	dst;
@@ -38,18 +38,19 @@ void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 	t_off = 0;
 	ca = data->player.pa - ray.ra;
 	secure_angle(&ca);
-	disW = (cos(ca)) * (cos(ray.ra) * (ray.rx - data->player.pdx) - sin(ray.ra) * (ray.ry - data->player.pdy));
-	lineH = (RES * WINDOW_HEIGHT) / disW;
-	if (lineH > WINDOW_HEIGHT)
+	disw = (cos(ca)) * (cos(ray.ra) * (ray.rx - data->player.pdx)
+		- sin(ray.ra) * (ray.ry - data->player.pdy));
+	lineh = (RES * WINDOW_HEIGHT) / disw;
+	if (lineh > WINDOW_HEIGHT)
 	{
-		t_off = (lineH - WINDOW_HEIGHT) / 2;
-		lineH = WINDOW_HEIGHT;
+		t_off = (lineh - WINDOW_HEIGHT) / 2;
+		lineh = WINDOW_HEIGHT;
 	}
-	lineO = WINDOW_HEIGHT - (WINDOW_HEIGHT / 2 - lineH / 2);
+	lineo = WINDOW_HEIGHT - (WINDOW_HEIGHT / 2 - lineh / 2);
 	ray_pixel.x = ray_num;
-	ray_pixel.y = lineO - lineH;
+	ray_pixel.y = lineo - lineh;
 	dst.x = ray_pixel.x + 1;
-	dst.y = lineO;
+	dst.y = lineo;
 	draw_texture_pillar(data, ray, ray_pixel, dst, t_off);
 }
 

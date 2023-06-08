@@ -6,27 +6,26 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:36:39 by vpac              #+#    #+#             */
-/*   Updated: 2023/05/25 18:23:59 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/01 12:32:47 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
-
 float	pitagora(float ax, float ay, float bx, float by)
 {
-	return(sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
+	return (sqrt((bx - ax) * (bx - ax) + (by - ay) * (by - ay)));
 }
 
-static t_ray_data	check_for_shortest_line(t_player_data *p, t_ray_data h_inter,
-						t_ray_data v_inter)
+static t_ray_data	check_for_shortest_line(t_player_data *p,
+						t_ray_data h_inter, t_ray_data v_inter)
 {
-	float	disH;
-	float	disV;
+	float	dish;
+	float	disv;
 
-	disH = pitagora(p->px, p->py, h_inter.rx, h_inter.ry);
-	disV = pitagora(p->px, p->py, v_inter.rx, v_inter.ry);
-	if (disH > disV && disH != pitagora(p->px, p->py, p->px, p->py))
+	dish = pitagora(p->px, p->py, h_inter.rx, h_inter.ry);
+	disv = pitagora(p->px, p->py, v_inter.rx, v_inter.ry);
+	if (dish > disv && dish != pitagora(p->px, p->py, p->px, p->py))
 	{
 		v_inter.hit_horizontal = 0;
 		return (v_inter);
@@ -37,10 +36,13 @@ static t_ray_data	check_for_shortest_line(t_player_data *p, t_ray_data h_inter,
 
 void	secure_angle(float *angle)
 {
-	if (*angle < 0.0)
-		*angle += 2.0 * PI;
-	if (*angle > 2.0 * PI)
-		*angle -= 2.0 * PI;
+	while (*angle < 0.0 || *angle > 2.0 * PI)
+	{
+		if (*angle < 0.0)
+			*angle += 2.0 * PI;
+		if (*angle > 2.0 * PI)
+			*angle -= 2.0 * PI;
+	}
 }
 
 void	draw_ray_list(t_cub3d *data)
@@ -61,28 +63,27 @@ void	draw_ray_list(t_cub3d *data)
 void	cast_rays(t_cub3d *data)
 {
 	t_player_data	*player;
-	t_ray_data		*ray_list;
 	t_ray_data		vertical_inter;
 	t_ray_data		horizontal_inter;
 	int				i;
 
 	i = 0;
 	player = &(data->player);
-	ray_list = malloc(sizeof(t_ray_data) * (WINDOW_WIDTH) + 1);
-	if (!ray_list)
+	data->ray_list = malloc(sizeof(t_ray_data) * (WINDOW_WIDTH) + 1);
+	if (!data->ray_list)
 		return ;
-	ray_list[i].ra = player->pa - (DEG * player->fov / 2.0);
-	secure_angle(&ray_list[i].ra);
+	data->ray_list[i].ra = player->pa - (DEG * player->fov / 2.0);
+	secure_angle(&data->ray_list[i].ra);
 	while (i < WINDOW_WIDTH)
 	{
-		horizontal_inter = *check_for_horizontal_wall(data, &ray_list[i]);
-		vertical_inter = *check_for_vertical_wall(data, &ray_list[i]);
-		ray_list[i] = check_for_shortest_line(&(data->player), horizontal_inter,
-										vertical_inter);
+		horizontal_inter = *check_for_horizontal_wall(data, &data->ray_list[i]);
+		vertical_inter = *check_for_vertical_wall(data, &data->ray_list[i]);
+		data->ray_list[i] = check_for_shortest_line(&(data->player),
+				horizontal_inter, vertical_inter);
 		if (i + 1 < WINDOW_WIDTH)
-			ray_list[i + 1].ra = ray_list[i].ra + DEG / (WINDOW_WIDTH / player->fov);
+			data->ray_list[i + 1].ra = data->ray_list[i].ra + DEG
+				/ (WINDOW_WIDTH / player->fov);
 		i++;
 	}
 	data->ray_count = WINDOW_WIDTH;
-	data->ray_list = ray_list;
 }
