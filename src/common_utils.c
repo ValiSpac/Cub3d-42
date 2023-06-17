@@ -6,7 +6,7 @@
 /*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:30:30 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/04 14:53:25 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 10:51:53 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,11 @@ void	cub3d_destroy_mlx(t_cub3d cub3d)
 		mlx_destroy_image(cub3d.mlx, cub3d.E_texture.frame.mlx_img);
 	mlx_destroy_display(cub3d.mlx);
 	free(cub3d.mlx);
+}
+
+float	min_float(float a, float b)
+{
+	if (a < b)
+		return (a);
+	return (b);
 }

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/06/02 15:26:20 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 11:49:12 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,17 @@
 # define WINDOW_WIDTH 1200
 # define WINDOW_HEIGHT 600
 # define PI  3.14159265358979323846
-# define E 0
-# define W PI
+# define N (PI / 2.0)
+# define S (3.0 * (PI / 2.0))
+# define E (0.0)
+# define W (PI)
 # define RES 64
 # define DEG 0.0174532925
 # define RAY_PER_DEGREE 30
 
 # define PLAYER_SPEED 10.0
 # define PLAYER_ANGLE_SPEED 4.0
-# define SLIDE_DISTANCE 0.4
+# define SLIDE_DISTANCE 0.1
 
 typedef struct s_pixel_pos	t_pixel_pos;
 struct s_pixel_pos {
@@ -92,6 +94,8 @@ struct s_player_data
 	int		move_left;
 	int		move_pa_left;
 	int		move_pa_right;
+	double	plane_vec_x;
+	double	plane_vec_y;
 };
 
 typedef struct s_ray_data		t_ray_data;
@@ -132,6 +136,7 @@ struct s_cub3d
 void		print_err(char *str);
 int			cub3d_init_mlx(t_cub3d *cub3d);
 void		cub3d_destroy_mlx(t_cub3d cub3d);
+float		min_float(float a, float b);
 
 // events
 int			handle_keydown(int keysym, t_cub3d *cub3d);
@@ -140,6 +145,7 @@ int			handle_window_kill(t_cub3d *cub3d);
 
 // controls
 void		update_player_pos(t_cub3d *data);
+void		update_player_plane_vector(t_cub3d *data);
 
 // parse/get_data_utils
 int			have_missing_data(t_parse_data *parse_data);
@@ -195,9 +201,7 @@ t_ray_data	*check_for_horizontal_wall(t_cub3d *data, t_ray_data *ray_elem);
 void		draw3d(t_cub3d *data, t_ray_data ray, int ray_num);
 //draw_ray/calc_ray.c
 float		pitagora(float ax, float ay, float bx, float by);
-void		secure_angle(float *angle);
 void		draw_ray_list(t_cub3d *data);
 void		cast_rays(t_cub3d *data);
-
 
 #endif

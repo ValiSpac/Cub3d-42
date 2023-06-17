@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:36:39 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/01 12:32:47 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 11:47:50 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,17 +34,6 @@ static t_ray_data	check_for_shortest_line(t_player_data *p,
 	return (h_inter);
 }
 
-void	secure_angle(float *angle)
-{
-	while (*angle < 0.0 || *angle > 2.0 * PI)
-	{
-		if (*angle < 0.0)
-			*angle += 2.0 * PI;
-		if (*angle > 2.0 * PI)
-			*angle -= 2.0 * PI;
-	}
-}
-
 void	draw_ray_list(t_cub3d *data)
 {
 	int	i;
@@ -60,6 +49,22 @@ void	draw_ray_list(t_cub3d *data)
 	}
 }
 
+double	get_ray_angle(t_cub3d *data, int window_x)
+{
+	double ra_vec_x;
+	double ra_vec_y;
+	double pa_vec_x;
+	double pa_vec_y;
+	double camera_x;
+
+	camera_x = 2 * window_x / (double)WINDOW_WIDTH - 1;
+	pa_vec_x = cos(data->player.pa);
+	pa_vec_y = sin(data->player.pa);
+	ra_vec_x = pa_vec_x + data->player.plane_vec_x * camera_x;
+	ra_vec_y = pa_vec_y + data->player.plane_vec_y * camera_x;
+	return (atan2(ra_vec_y, ra_vec_x));
+}
+
 void	cast_rays(t_cub3d *data)
 {
 	t_player_data	*player;
@@ -72,17 +77,13 @@ void	cast_rays(t_cub3d *data)
 	data->ray_list = malloc(sizeof(t_ray_data) * (WINDOW_WIDTH) + 1);
 	if (!data->ray_list)
 		return ;
-	data->ray_list[i].ra = player->pa - (DEG * player->fov / 2.0);
-	secure_angle(&data->ray_list[i].ra);
 	while (i < WINDOW_WIDTH)
 	{
+		data->ray_list[i].ra = get_ray_angle(data, i);
 		horizontal_inter = *check_for_horizontal_wall(data, &data->ray_list[i]);
 		vertical_inter = *check_for_vertical_wall(data, &data->ray_list[i]);
 		data->ray_list[i] = check_for_shortest_line(&(data->player),
 				horizontal_inter, vertical_inter);
-		if (i + 1 < WINDOW_WIDTH)
-			data->ray_list[i + 1].ra = data->ray_list[i].ra + DEG
-				/ (WINDOW_WIDTH / player->fov);
 		i++;
 	}
 	data->ray_count = WINDOW_WIDTH;

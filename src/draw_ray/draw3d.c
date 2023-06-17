@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   draw3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:07:48 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/01 12:38:10 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 11:43:36 by lopayet-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,6 @@ void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 
 	t_off = 0;
 	ca = data->player.pa - ray.ra;
-	secure_angle(&ca);
 	disw = (cos(ca)) * (cos(ray.ra) * (ray.rx - data->player.pdx)
 		- sin(ray.ra) * (ray.ry - data->player.pdy));
 	lineh = (RES * WINDOW_HEIGHT) / disw;

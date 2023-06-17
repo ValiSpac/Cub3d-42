@@ -11,6 +11,7 @@ void	update_player_pos(t_cub3d *data)
 		data->player.pa -= (float)PLAYER_ANGLE_SPEED / 100.0;
 	if (data->player.move_pa_left)
 		data->player.pa += (float)PLAYER_ANGLE_SPEED / 100.0;
+	update_player_plane_vector(data);
 	if (data->player.move_left)
 		player_move(data,
 			(float)PLAYER_SPEED * -sin(data->player.pa),
@@ -29,11 +30,15 @@ void	update_player_pos(t_cub3d *data)
 			(float)PLAYER_SPEED * sin(data->player.pa));
 }
 
-static float	min_float(float a, float b)
+void	update_player_plane_vector(t_cub3d *data)
 {
-	if (a < b)
-		return (a);
-	return (b);
+	double	plane_angle;
+	double	multiplier;
+
+	multiplier = 0.66;
+	plane_angle = data->player.pa + (PI / 2.0);
+	data->player.plane_vec_x = cos(plane_angle) * multiplier;
+	data->player.plane_vec_y = sin(plane_angle) * multiplier;
 }
 
 static void	player_move(t_cub3d *data, float x_add, float y_add)
