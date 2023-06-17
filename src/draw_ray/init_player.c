@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_player.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:11:06 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/17 11:13:05 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:14:59 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 static float	get_pa_from_start_point(int start)
 {
 	if (start == 3)
-		return (N);
+		return (PI / 2);
 	if (start == 4)
-		return (S);
+		return (3.0 * (PI / 2.0));
 	if (start == 5)
-		return (E);
+		return (0.0);
 	if (start == 6)
-		return (W);
+		return (PI);
 	return (-1.0);
 }
 
@@ -42,8 +42,6 @@ void	init_player_data(t_cub3d	*data)
 			if (data->parse.map[y][x] >= 3)
 			{
 				player->pa = get_pa_from_start_point(data->parse.map[y][x]);
-				player->py = y * RES + RES / 2;
-				player->px = x * RES + RES / 2;
 				player->pdy = y * RES + RES / 2;
 				player->pdx = x * RES + RES / 2;
 				update_player_plane_vector(data);

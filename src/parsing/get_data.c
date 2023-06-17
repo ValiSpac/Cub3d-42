@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:36:33 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/04 15:43:56 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:44:22 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,15 +54,15 @@ static int	fill_color_data_from_line_split(char **line_split,
 		return (ft_split_free(color_split), set_parse_errno(parse_data, 7), 1);
 	if (!ft_strncmp(line_split[0], "F", 1))
 	{
-		parse_data->FC = (ft_atoi(color_split[0]) << 16)
+		parse_data->fc = (ft_atoi(color_split[0]) << 16)
 			+ (ft_atoi(color_split[1]) << 8) + (ft_atoi(color_split[2]));
-		parse_data->FC_set = 1;
+		parse_data->fc_set = 1;
 	}
 	if (!ft_strncmp(line_split[0], "C", 1))
 	{
-		parse_data->CC = (ft_atoi(color_split[0]) << 16)
+		parse_data->cc = (ft_atoi(color_split[0]) << 16)
 			+ (ft_atoi(color_split[1]) << 8) + (ft_atoi(color_split[2]));
-		parse_data->CC_set = 1;
+		parse_data->cc_set = 1;
 	}
 	if (line_split[2])
 		return (set_parse_errno(parse_data, 6),
@@ -70,16 +70,17 @@ static int	fill_color_data_from_line_split(char **line_split,
 	return (ft_split_free(color_split), 0);
 }
 
-static int	fill_texture_data_from_line_split(char **line_split, t_parse_data *parse_data)
+static int	fill_texture_data_from_line_split(char **line_split,
+				t_parse_data *parse_data)
 {
 	if (!ft_strncmp(line_split[0], "NO ", 2))
-		parse_data->NO = ft_strdup(line_split[1]);
+		parse_data->no = ft_strdup(line_split[1]);
 	if (!ft_strncmp(line_split[0], "SO ", 2))
-		parse_data->SO = ft_strdup(line_split[1]);
+		parse_data->so = ft_strdup(line_split[1]);
 	if (!ft_strncmp(line_split[0], "WE ", 2))
-		parse_data->WE = ft_strdup(line_split[1]);
+		parse_data->we = ft_strdup(line_split[1]);
 	if (!ft_strncmp(line_split[0], "EA ", 2))
-		parse_data->EA = ft_strdup(line_split[1]);
+		parse_data->ea = ft_strdup(line_split[1]);
 	if (line_split[2])
 		return (set_parse_errno(parse_data, 6), 1);
 	return (0);
@@ -87,17 +88,17 @@ static int	fill_texture_data_from_line_split(char **line_split, t_parse_data *pa
 
 static int	is_line_duplicate(char *line, t_parse_data *parse_data)
 {
-	if (!ft_strncmp(line, "NO ", 3) && parse_data->NO)
+	if (!ft_strncmp(line, "NO ", 3) && parse_data->no)
 		return (1);
-	if (!ft_strncmp(line, "SO ", 3) && parse_data->SO)
+	if (!ft_strncmp(line, "SO ", 3) && parse_data->so)
 		return (1);
-	if (!ft_strncmp(line, "WE ", 3) && parse_data->WE)
+	if (!ft_strncmp(line, "WE ", 3) && parse_data->we)
 		return (1);
-	if (!ft_strncmp(line, "EA ", 3) && parse_data->EA)
+	if (!ft_strncmp(line, "EA ", 3) && parse_data->ea)
 		return (1);
-	if (!ft_strncmp(line, "F ", 2) && parse_data->FC_set)
+	if (!ft_strncmp(line, "F ", 2) && parse_data->fc_set)
 		return (1);
-	if (!ft_strncmp(line, "C ", 2) && parse_data->CC_set)
+	if (!ft_strncmp(line, "C ", 2) && parse_data->cc_set)
 		return (1);
 	return (0);
 }

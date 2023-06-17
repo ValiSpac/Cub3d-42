@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:27:33 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/12 16:10:40 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 15:21:47 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static void	cub3d_free(t_cub3d *cub3d);
 
 int	main(int argc, char **argv)
 {
-	t_cub3d cub3d;
+	t_cub3d	cub3d;
 
 	(void)argc;
 	ft_bzero(&cub3d, sizeof(t_cub3d));
@@ -65,5 +65,6 @@ static void	set_hooks(t_cub3d *cub3d)
 	mlx_loop_hook(cub3d->mlx, &cub3d_loop, cub3d);
 	mlx_hook(cub3d->window, KeyRelease, KeyReleaseMask, &handle_keyup, cub3d);
 	mlx_hook(cub3d->window, KeyPress, KeyPressMask, &handle_keydown, cub3d);
-	mlx_hook(cub3d->window, DestroyNotify, NoEventMask, &handle_window_kill, cub3d);
+	mlx_hook(cub3d->window, DestroyNotify, NoEventMask,
+		&handle_window_kill, cub3d);
 }

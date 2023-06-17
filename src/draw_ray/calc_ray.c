@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   calc_ray.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 13:36:39 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/17 11:47:50 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 16:21:42 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ static t_ray_data	check_for_shortest_line(t_player_data *p,
 	float	dish;
 	float	disv;
 
-	dish = pitagora(p->px, p->py, h_inter.rx, h_inter.ry);
-	disv = pitagora(p->px, p->py, v_inter.rx, v_inter.ry);
-	if (dish > disv && dish != pitagora(p->px, p->py, p->px, p->py))
+	dish = pitagora(p->pdx, p->pdy, h_inter.rx, h_inter.ry);
+	disv = pitagora(p->pdx, p->pdy, v_inter.rx, v_inter.ry);
+	if (dish > disv && dish != pitagora(p->pdx, p->pdy, p->pdx, p->pdy))
 	{
 		v_inter.hit_horizontal = 0;
 		return (v_inter);
@@ -41,7 +41,7 @@ void	draw_ray_list(t_cub3d *data)
 
 	ray_num = 0;
 	i = data->ray_count - 1;
-	while (i > 0)
+	while (i >= 0)
 	{
 		draw3d(data, data->ray_list[i], ray_num);
 		ray_num++;
@@ -51,11 +51,11 @@ void	draw_ray_list(t_cub3d *data)
 
 double	get_ray_angle(t_cub3d *data, int window_x)
 {
-	double ra_vec_x;
-	double ra_vec_y;
-	double pa_vec_x;
-	double pa_vec_y;
-	double camera_x;
+	double	ra_vec_x;
+	double	ra_vec_y;
+	double	pa_vec_x;
+	double	pa_vec_y;
+	double	camera_x;
 
 	camera_x = 2 * window_x / (double)WINDOW_WIDTH - 1;
 	pa_vec_x = cos(data->player.pa);
@@ -67,13 +67,11 @@ double	get_ray_angle(t_cub3d *data, int window_x)
 
 void	cast_rays(t_cub3d *data)
 {
-	t_player_data	*player;
 	t_ray_data		vertical_inter;
 	t_ray_data		horizontal_inter;
 	int				i;
 
 	i = 0;
-	player = &(data->player);
 	data->ray_list = malloc(sizeof(t_ray_data) * (WINDOW_WIDTH) + 1);
 	if (!data->ray_list)
 		return ;

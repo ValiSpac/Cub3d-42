@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 14:33:53 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/04 15:43:56 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:43:20 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,14 +50,14 @@ static int	allocate_map(t_parse_data *parse_data)
 void	free_parse_data(t_parse_data *parse_data)
 {
 	free_cub3d_map(parse_data->map);
-	if (parse_data->NO)
-		free(parse_data->NO);
-	if (parse_data->SO)
-		free(parse_data->SO);
-	if (parse_data->WE)
-		free(parse_data->WE);
-	if (parse_data->EA)
-		free(parse_data->EA);
+	if (parse_data->no)
+		free(parse_data->no);
+	if (parse_data->so)
+		free(parse_data->so);
+	if (parse_data->we)
+		free(parse_data->we);
+	if (parse_data->ea)
+		free(parse_data->ea);
 }
 
 int	parse_file(char *file, t_parse_data *parse_data)

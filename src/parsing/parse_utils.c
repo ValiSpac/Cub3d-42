@@ -1,3 +1,14 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 15:37:07 by vpac              #+#    #+#             */
+/*   Updated: 2023/06/17 15:37:28 by vpac             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
@@ -18,7 +29,7 @@ void	set_parse_errno(t_parse_data *parse_data, int n)
 	parse_data->parse_errno = n;
 }
 
-void	print_parsing_error(int	err)
+void	print_parsing_error(int err)
 {
 	ft_putstr_fd("Error\n", 2);
 	if (err == 1)

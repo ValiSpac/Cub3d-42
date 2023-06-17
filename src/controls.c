@@ -1,9 +1,20 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   controls.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/06/17 15:09:15 by vpac              #+#    #+#             */
+/*   Updated: 2023/06/17 15:19:03 by vpac             ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
 #include "cub3d.h"
 
 static void		player_move(t_cub3d *data, float x_add, float y_add);
-static float	get_max_player_x_move(t_cub3d *data, float x_want);
-static float	get_max_player_y_move(t_cub3d *data, float y_want);
+static float	get_max_x_move(t_cub3d *data, float x_want);
+static float	get_max_y_move(t_cub3d *data, float y_want);
 
 void	update_player_pos(t_cub3d *data)
 {
@@ -43,7 +54,6 @@ void	update_player_plane_vector(t_cub3d *data)
 
 static void	player_move(t_cub3d *data, float x_add, float y_add)
 {
-	float	step;
 	int		x_neg;
 	int		y_neg;
 
@@ -53,27 +63,22 @@ static void	player_move(t_cub3d *data, float x_add, float y_add)
 		x_add = -x_add;
 	if (y_neg)
 		y_add = -y_add;
-	step = 0.02;
 	while (x_add > 0 || y_add > 0)
 	{
 		if (x_add > 0 && x_neg)
-			data->player.pdx += get_max_player_x_move(data, -min_float(step, x_add));
+			data->player.pdx += get_max_x_move(data, -min_float(0.02, x_add));
 		if (x_add > 0 && !x_neg)
-			data->player.pdx += get_max_player_x_move(data, min_float(step, x_add));
-		data->player.px = (int)data->player.pdx;
+			data->player.pdx += get_max_x_move(data, min_float(0.02, x_add));
 		if (y_add > 0 && y_neg)
-			data->player.pdy += get_max_player_y_move(data, -min_float(step, y_add));
+			data->player.pdy += get_max_y_move(data, -min_float(0.02, y_add));
 		if (y_add > 0 && !y_neg)
-			data->player.pdy += get_max_player_y_move(data, min_float(step, y_add));
-		data->player.py = (int)data->player.pdy;
-		x_add -= step;
-		y_add -= step;
+			data->player.pdy += get_max_y_move(data, min_float(0.02, y_add));
+		x_add -= 0.02;
+		y_add -= 0.02;
 	}
-	data->player.px = data->player.pdx;
-	data->player.py = data->player.pdy;
 }
 
-static float	get_max_player_x_move(t_cub3d *data, float x_want)
+static float	get_max_x_move(t_cub3d *data, float x_want)
 {
 	int	map_y;
 	int	map_x_want;
@@ -95,7 +100,7 @@ static float	get_max_player_x_move(t_cub3d *data, float x_want)
 	return (x_want);
 }
 
-static float	get_max_player_y_move(t_cub3d *data, float y_want)
+static float	get_max_y_move(t_cub3d *data, float y_want)
 {
 	int	map_x;
 	int	map_y_want;

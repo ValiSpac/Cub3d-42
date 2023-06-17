@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_data_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 16:37:20 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/04 15:43:56 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:44:22 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 int	have_missing_data(t_parse_data *parse_data)
 {
-	return (!(parse_data->NO
-		&& parse_data->SO
-		&& parse_data->WE
-		&& parse_data->EA
-		&& parse_data->CC_set
-		&& parse_data->FC_set));
+	return (!(parse_data->no
+			&& parse_data->so
+			&& parse_data->we
+			&& parse_data->ea
+			&& parse_data->cc_set
+			&& parse_data->fc_set));
 }
 
-int		is_texture_line(char *line)
+int	is_texture_line(char *line)
 {
 	return (!ft_strncmp(line, "NO ", 3)
 		|| !ft_strncmp(line, "SO ", 3)
@@ -30,7 +30,7 @@ int		is_texture_line(char *line)
 		|| !ft_strncmp(line, "EA ", 3));
 }
 
-int		is_color_line(char *line)
+int	is_color_line(char *line)
 {
 	return (!ft_strncmp(line, "F ", 2)
 		|| !ft_strncmp(line, "C ", 2));
@@ -38,9 +38,9 @@ int		is_color_line(char *line)
 
 int	is_color_valid(char **split)
 {
-	int	i;
-	int	j;
-	char *str;
+	int		i;
+	int		j;
+	char	*str;
 
 	j = 0;
 	while (j < 3)

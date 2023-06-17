@@ -3,88 +3,93 @@
 /*                                                        :::      ::::::::   */
 /*   draw3d.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:07:48 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/17 11:43:36 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:47:09 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "cub3d.h"
 
+typedef struct s_texturing_data	t_texturing_data;
 struct s_texturing_data
 {
+	int			t_off;
 	t_pixel_pos	src;
 	t_pixel_pos	dst;
+	t_cub3d		*data;
+	t_texture	*texture;
 };
 
-static void		draw_texture_pillar(t_cub3d *data, t_ray_data ray,
-					t_pixel_pos src, t_pixel_pos dst, int t_off);
+static void			draw_texture_pillar(t_ray_data ray,
+						t_texturing_data *t_data);
 static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray);
 static int			get_ray_hit_pos(t_ray_data ray);
-static void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
-	t_pixel_pos window_src, int window_line_h, int texture_x, int t_off);
+static void			frame_draw_texture_line(t_texturing_data *text_data,
+						t_pixel_pos window_src, int window_line_h,
+						int texture_x);
 
 void	draw3d(t_cub3d *data, t_ray_data ray, int ray_num)
 {
-	int			lineh;
-	float		disw;
-	int			lineo;
-	float		ca;
-	t_pixel_pos	ray_pixel;
-	t_pixel_pos	dst;
-	int			t_off;
+	int					lineh;
+	float				disw;
+	int					lineo;
+	float				ca;
+	t_texturing_data	text_data;
 
-	t_off = 0;
+	text_data.t_off = 0;
 	ca = data->player.pa - ray.ra;
 	disw = (cos(ca)) * (cos(ray.ra) * (ray.rx - data->player.pdx)
-		- sin(ray.ra) * (ray.ry - data->player.pdy));
+			- sin(ray.ra) * (ray.ry - data->player.pdy));
 	lineh = (RES * WINDOW_HEIGHT) / disw;
 	if (lineh > WINDOW_HEIGHT)
 	{
-		t_off = (lineh - WINDOW_HEIGHT) / 2;
+		text_data.t_off = (lineh - WINDOW_HEIGHT) / 2;
 		lineh = WINDOW_HEIGHT;
 	}
 	lineo = WINDOW_HEIGHT - (WINDOW_HEIGHT / 2 - lineh / 2);
-	ray_pixel.x = ray_num;
-	ray_pixel.y = lineo - lineh;
-	dst.x = ray_pixel.x + 1;
-	dst.y = lineo;
-	draw_texture_pillar(data, ray, ray_pixel, dst, t_off);
+	text_data.src.x = ray_num;
+	text_data.src.y = lineo - lineh;
+	text_data.dst.x = text_data.src.x + 1;
+	text_data.dst.y = lineo;
+	text_data.data = data;
+	draw_texture_pillar(ray, &text_data);
 }
 
-static void	draw_texture_pillar(t_cub3d *data, t_ray_data ray, t_pixel_pos src, t_pixel_pos dst, int t_off)
+static void	draw_texture_pillar(t_ray_data ray, t_texturing_data *text_data)
 {
-	t_texture	*texture;
 	int			height;
 	int			ray_hit_pos;
 
-	texture = get_ray_texture(data, ray);
+	text_data->texture = get_ray_texture(text_data->data, ray);
 	ray_hit_pos = get_ray_hit_pos(ray);
-	height = dst.y - src.y;
-	while (src.x < dst.x)
+	height = text_data->dst.y - text_data->src.y;
+	while (text_data->src.x < text_data->dst.x)
 	{
-		frame_draw_texture_line(data, texture, src, height, ray_hit_pos, t_off);
-		src.x++;
+		frame_draw_texture_line(text_data, text_data->src, height, ray_hit_pos);
+		text_data->src.x++;
 	}
 }
 
-static void	frame_draw_texture_line(t_cub3d *data, t_texture *texture,
-	t_pixel_pos window_src, int window_line_h, int texture_x, int t_off)
+static void	frame_draw_texture_line(t_texturing_data *text_data,
+	t_pixel_pos window_src, int window_line_h, int texture_x)
 {
 	t_pixel_pos	window_pos;
 	t_pixel_pos	texture_pos;
-	int	i;
+	int			i;
 
-	(void)t_off;
 	i = 0;
 	window_pos.x = window_src.x;
 	window_pos.y = window_src.y;
 	texture_pos.x = texture_x;
 	while (i < window_line_h)
 	{
-		texture_pos.y = (float)(i + t_off) / (window_line_h + t_off * 2) * (texture->height);
-		frame_draw_pixel(data->frame, window_pos, texture_get_pixel(*texture, texture_pos));
+		texture_pos.y = (float)(i + text_data->t_off)
+			/ (window_line_h + text_data->t_off * 2)
+			*(text_data->texture->height);
+		frame_draw_pixel(text_data->data->frame, window_pos,
+			texture_get_pixel(*(text_data->texture), texture_pos));
 		window_pos.y++;
 		i++;
 	}
@@ -108,10 +113,10 @@ static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray)
 	if (ray.hit_horizontal)
 	{
 		if (ray.yo > 0.0)
-			return (&data->S_texture);
-		return (&data->N_texture);
+			return (&data->s_texture);
+		return (&data->n_texture);
 	}
 	if (ray.xo > 0.0)
-		return (&data->W_texture);
-	return (&data->E_texture);
+		return (&data->w_texture);
+	return (&data->e_texture);
 }

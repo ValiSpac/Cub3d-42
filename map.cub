@@ -3,19 +3,19 @@
 
 
 
-C  40,40,40
-NO ./north.xpm
+C  175,0,180
+NO ./textures/elon.xpm
 
 
- SO ./south.xpm
+ SO ./textures/mrclean.xpm
 
 
-     EA ./east.xpm
+     EA ./textures/zaza2.xpm
 
 
-F  100,0,140
+F  255,0,140
 
-   WE                ./west.xpm
+   WE                ./textures/piao.xpm
 
 
 

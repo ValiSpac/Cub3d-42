@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cub3d.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: lopayet- <lopayet-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/06/17 11:49:12 by lopayet-         ###   ########.fr       */
+/*   Updated: 2023/06/17 15:47:47 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,27 +25,23 @@
 # include <stdio.h>
 
 # define WINDOW_WIDTH 1200
-# define WINDOW_HEIGHT 600
-# define PI  3.14159265358979323846
-# define N (PI / 2.0)
-# define S (3.0 * (PI / 2.0))
-# define E (0.0)
-# define W (PI)
+# define WINDOW_HEIGHT 800
+# define PI 3.14159265358979323846
 # define RES 64
-# define DEG 0.0174532925
-# define RAY_PER_DEGREE 30
+# define WIN_W WINDOW_WIDTH
+# define WIN_H WINDOW_HEIGHT
 
 # define PLAYER_SPEED 10.0
 # define PLAYER_ANGLE_SPEED 4.0
 # define SLIDE_DISTANCE 0.1
 
-typedef struct s_pixel_pos	t_pixel_pos;
+typedef struct s_pixel_pos		t_pixel_pos;
 struct s_pixel_pos {
 	int	x;
 	int	y;
 };
 
-typedef struct s_frame		t_frame;
+typedef struct s_frame			t_frame;
 struct s_frame {
 	void	*mlx_img;
 	char	*addr;
@@ -54,7 +50,7 @@ struct s_frame {
 	int		endian;
 };
 
-typedef struct s_texture	t_texture;
+typedef struct s_texture		t_texture;
 struct s_texture
 {
 	t_frame	frame;
@@ -62,31 +58,29 @@ struct s_texture
 	int		height;
 };
 
-typedef struct s_parse_data	t_parse_data;
+typedef struct s_parse_data		t_parse_data;
 struct s_parse_data
 {
 	int		**map;
 	int		map_h;
 	int		map_w;
-	char	*NO;
-	char	*SO;
-	char	*WE;
-	char	*EA;
-	int		FC;
-	int		CC;
-	int		FC_set;
-	int		CC_set;
+	char	*no;
+	char	*so;
+	char	*we;
+	char	*ea;
+	int		fc;
+	int		cc;
+	int		fc_set;
+	int		cc_set;
 	int		parse_errno;
 };
 
-typedef struct s_player_data		t_player_data;
+typedef struct s_player_data	t_player_data;
 struct s_player_data
 {
 	float	fov;
 	float	pdx;
 	float	pdy;
-	int		px;
-	int		py;
 	float	pa;
 	int		move_forward;
 	int		move_backward;
@@ -112,25 +106,22 @@ struct s_ray_data
 	int		hit_horizontal;
 };
 
-typedef struct s_cub3d		t_cub3d;
+typedef struct s_cub3d			t_cub3d;
 struct s_cub3d
 {
 	void			*mlx;
 	void			*window;
 	t_parse_data	parse;
 	t_frame			frame;
-	t_texture		N_texture;
-	t_texture		S_texture;
-	t_texture		W_texture;
-	t_texture		E_texture;
+	t_texture		n_texture;
+	t_texture		s_texture;
+	t_texture		w_texture;
+	t_texture		e_texture;
 	t_player_data	player;
 	t_ray_data		*ray_list;
 	int				ray_count;
 	int				exit;
 };
-
-
-// cub3d
 
 // common_utils
 void		print_err(char *str);
@@ -165,14 +156,12 @@ void		dump_map(t_parse_data *parse_data);
 // parse/parse utils
 int			line_is_map_content(char *line);
 void		set_parse_errno(t_parse_data *parse_data, int n);
-void		print_parsing_error(int	err);
+void		print_parsing_error(int err);
 // parse/format check
 int			file_format_error(char *file, t_parse_data *parse_data);
 int			filename_has_cub_extension(char *filename);
 // parse/map check
 int			is_map_valid(t_parse_data *parse_data);
-
-
 
 // render/utils.c
 void		frame_draw_pixel(t_frame frame, t_pixel_pos p, int color);
@@ -189,7 +178,7 @@ int			load_textures(t_cub3d *cub3d);
 int			are_textures_valid(t_cub3d *cub3d);
 int			texture_get_pixel(t_texture texture, t_pixel_pos p);
 // render/background.c
-void	draw_background(t_cub3d *cub3d);
+void		draw_background(t_cub3d *cub3d);
 
 //draw_ray/init_player.c
 void		init_player_data(t_cub3d	*data);

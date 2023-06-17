@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 14:56:20 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/05/25 17:17:25 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 15:26:39 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,6 @@ inline void	frame_draw_pixel(t_frame frame, t_pixel_pos p, int color)
 
 void	put_frame_to_window(t_cub3d *cub3d)
 {
-	mlx_clear_window(cub3d->mlx, cub3d->window);
-	mlx_put_image_to_window(cub3d->mlx, cub3d->window, cub3d->frame.mlx_img, 0, 0);
+	mlx_put_image_to_window(cub3d->mlx, cub3d->window,
+		cub3d->frame.mlx_img, 0, 0);
 }
