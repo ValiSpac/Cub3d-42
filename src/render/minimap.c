@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/04 15:20:35 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/06/17 16:28:55 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 16:42:47 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	frame_draw_2d_map(t_cub3d *cub3d)
 			if (cub3d->parse.map[y][x] == 1)
 				frame_draw_block(cub3d, y, x, 4473924);
 			if (cub3d->parse.map[y][x] == 2)
-				frame_draw_block(cub3d, y, x, 16777215);
+				frame_draw_block(cub3d, y, x, 9211020);
 			x++;
 		}
 		y++;
@@ -52,15 +52,15 @@ void	frame_draw_player(t_cub3d *cub3d, float y_start, float x_start)
 	int			x_end;
 	int			y_end;
 
-	x_end = x_start * MINIMAP_SCALE + MINIMAP_SCALE / 2;
-	y_end = y_start * MINIMAP_SCALE + MINIMAP_SCALE / 2;
-	pos.y = y_start * MINIMAP_SCALE - MINIMAP_SCALE / 2;
+	x_end = x_start * MINIMAP_SCALE + MINIMAP_SCALE / 3;
+	y_end = y_start * MINIMAP_SCALE + MINIMAP_SCALE / 3;
+	pos.y = y_start * MINIMAP_SCALE - MINIMAP_SCALE / 3;
 	while (pos.y < y_end)
 	{
-		pos.x = x_start * MINIMAP_SCALE - MINIMAP_SCALE / 2;
+		pos.x = x_start * MINIMAP_SCALE - MINIMAP_SCALE / 3;
 		while (pos.x < x_end)
 		{
-			frame_draw_pixel(cub3d->frame, pos, 16776960);
+			frame_draw_pixel(cub3d->frame, pos, 16762880);
 			pos.x++;
 		}
 		pos.y++;
