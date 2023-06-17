@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/10 12:07:48 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/17 15:47:09 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 17:15:46 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,6 @@ static t_texture	*get_ray_texture(t_cub3d *data, t_ray_data ray)
 		return (&data->n_texture);
 	}
 	if (ray.xo > 0.0)
-		return (&data->w_texture);
-	return (&data->e_texture);
+		return (&data->e_texture);
+	return (&data->w_texture);
 }

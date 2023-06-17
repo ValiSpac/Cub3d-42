@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/17 15:09:15 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/17 15:19:03 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 17:03:45 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ void	update_player_plane_vector(t_cub3d *data)
 	double	plane_angle;
 	double	multiplier;
 
-	multiplier = 0.66;
+	multiplier = 0.75;
 	plane_angle = data->player.pa + (PI / 2.0);
 	data->player.plane_vec_x = cos(plane_angle) * multiplier;
 	data->player.plane_vec_y = sin(plane_angle) * multiplier;

@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:13:32 by vpac              #+#    #+#             */
-/*   Updated: 2023/06/01 12:21:07 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/17 17:13:25 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,11 @@ static void	get_distance_to_hor_wall(t_player_data *player, t_ray_data *ray,
 	{
 		ray->ry = player->pdy;
 		ray->rx = player->pdx;
+		if (sin(ray->ra) > 0.00001)
+			ray->xo = RES;
+		else
+			ray->xo = -RES;
+		ray->yo = 0;
 	}
 }
 
