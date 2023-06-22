@@ -6,7 +6,7 @@
 /*   By: vpac <vpac@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/25 13:22:01 by lopayet-          #+#    #+#             */
-/*   Updated: 2023/06/17 15:47:47 by vpac             ###   ########.fr       */
+/*   Updated: 2023/06/22 16:44:30 by vpac             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,17 @@
 # include "libft.h"
 # include <X11/X.h>
 # include <X11/keysym.h>
-# include <stdlib.h>
-# include <unistd.h>
 # include <fcntl.h>
 # include <math.h>
 
-# include <stdio.h>
-
-# define WINDOW_WIDTH 1200
-# define WINDOW_HEIGHT 800
+# define WINDOW_WIDTH 1800
+# define WINDOW_HEIGHT 1200
 # define PI 3.14159265358979323846
 # define RES 64
 # define WIN_W WINDOW_WIDTH
 # define WIN_H WINDOW_HEIGHT
 
-# define PLAYER_SPEED 10.0
+# define PLAYER_SPEED 8.0
 # define PLAYER_ANGLE_SPEED 4.0
 # define SLIDE_DISTANCE 0.1
 
