@@ -65,16 +65,17 @@ double	get_ray_angle(t_cub3d *data, int window_x)
 	return (atan2(ra_vec_y, ra_vec_x));
 }
 
-void	cast_rays(t_cub3d *data)
+int	cast_rays(t_cub3d *data)
 {
 	t_ray_data		vertical_inter;
 	t_ray_data		horizontal_inter;
 	int				i;
 
 	i = 0;
+	data->ray_count = 0;
 	data->ray_list = malloc(sizeof(t_ray_data) * (WINDOW_WIDTH) + 1);
 	if (!data->ray_list)
-		return ;
+		return (1);
 	while (i < WINDOW_WIDTH)
 	{
 		data->ray_list[i].ra = get_ray_angle(data, i);
@@ -85,4 +86,5 @@ void	cast_rays(t_cub3d *data)
 		i++;
 	}
 	data->ray_count = WINDOW_WIDTH;
+	return (0);
 }

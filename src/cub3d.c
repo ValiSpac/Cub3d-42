@@ -26,13 +26,15 @@ int	main(int argc, char **argv)
 	if (parse_file(argv[1], &cub3d.parse) != 0)
 		return (print_parsing_error(cub3d.parse.parse_errno),
 			cub3d_free(&cub3d), 2);
-	if (load_textures(&cub3d) != 0 || !are_textures_valid(&cub3d))
+	if (load_textures(&cub3d) != 0)
 		return (print_err("Invalid textures."),
 			cub3d_free(&cub3d), 3);
 	init_player_data(&cub3d);
 	set_hooks(&cub3d);
 	mlx_loop(cub3d.mlx);
 	cub3d_free(&cub3d);
+	if (cub3d.alloc_err)
+		return (print_err("Memory allocation error."), 1);
 	return (0);
 }
 
@@ -47,7 +49,11 @@ static int	cub3d_loop(t_cub3d *cub3d)
 	clear_frame(cub3d->frame);
 	cub3d->ray_list = 0;
 	draw_background(cub3d);
-	cast_rays(cub3d);
+	if (cast_rays(cub3d) != 0)
+	{
+		cub3d->alloc_err = 1;
+		return (mlx_loop_end(cub3d->mlx), 1);
+	}
 	draw_ray_list(cub3d);
 	update_player_pos(cub3d);
 	frame_draw_minimap(cub3d);

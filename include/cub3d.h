@@ -20,15 +20,15 @@
 # include <fcntl.h>
 # include <math.h>
 
-# define WINDOW_WIDTH 1800
-# define WINDOW_HEIGHT 1200
+# define WINDOW_WIDTH 1400
+# define WINDOW_HEIGHT 900
 # define PI 3.14159265358979323846
 # define RES 64
 # define WIN_W WINDOW_WIDTH
 # define WIN_H WINDOW_HEIGHT
 
-# define PLAYER_SPEED 8.0
-# define PLAYER_ANGLE_SPEED 4.0
+# define PLAYER_SPEED 9.0
+# define PLAYER_ANGLE_SPEED 6.0
 # define SLIDE_DISTANCE 0.1
 
 typedef struct s_pixel_pos		t_pixel_pos;
@@ -91,15 +91,16 @@ struct s_player_data
 typedef struct s_ray_data		t_ray_data;
 struct s_ray_data
 {
-	float	ra;
-	float	rx;
-	float	ry;
-	float	xo;
-	float	yo;
-	int		mx;
-	int		my;
-	int		mp;
-	int		hit_horizontal;
+	float		ra;
+	float		rx;
+	float		ry;
+	float		xo;
+	float		yo;
+	int			mx;
+	int			my;
+	int			mp;
+	int			hit_horizontal;
+	t_texture	*texture;
 };
 
 typedef struct s_cub3d			t_cub3d;
@@ -117,6 +118,7 @@ struct s_cub3d
 	t_ray_data		*ray_list;
 	int				ray_count;
 	int				exit;
+	int				alloc_err;
 };
 
 // common_utils
@@ -171,7 +173,6 @@ void		frame_draw_line(t_frame frame,
 void		frame_draw_minimap(t_cub3d *cub3d);
 // render/texture.c
 int			load_textures(t_cub3d *cub3d);
-int			are_textures_valid(t_cub3d *cub3d);
 int			texture_get_pixel(t_texture texture, t_pixel_pos p);
 // render/background.c
 void		draw_background(t_cub3d *cub3d);
@@ -187,6 +188,6 @@ void		draw3d(t_cub3d *data, t_ray_data ray, int ray_num);
 //draw_ray/calc_ray.c
 float		pitagora(float ax, float ay, float bx, float by);
 void		draw_ray_list(t_cub3d *data);
-void		cast_rays(t_cub3d *data);
+int			cast_rays(t_cub3d *data);
 
 #endif

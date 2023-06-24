@@ -49,22 +49,6 @@ int	load_textures(t_cub3d *cub3d)
 	return (0);
 }
 
-int	are_textures_valid(t_cub3d *cub3d)
-{
-	if (cub3d->n_texture.width != cub3d->n_texture.height
-		|| cub3d->s_texture.width != cub3d->s_texture.height
-		|| cub3d->w_texture.width != cub3d->w_texture.height
-		|| cub3d->e_texture.width != cub3d->e_texture.height)
-		return (0);
-	if (cub3d->n_texture.width != cub3d->s_texture.width
-		|| cub3d->s_texture.width != cub3d->w_texture.width
-		|| cub3d->w_texture.width != cub3d->e_texture.width)
-		return (0);
-	if (cub3d->n_texture.width != RES)
-		return (0);
-	return (1);
-}
-
 inline int	texture_get_pixel(t_texture texture, t_pixel_pos p)
 {
 	return (*(int *)(texture.frame.addr + (4) * (p.x + p.y * texture.width)));
